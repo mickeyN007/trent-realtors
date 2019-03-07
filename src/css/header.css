@@ -1,0 +1,30 @@
+nav ul {
+  display: inline-block;
+  margin-top: 0;
+  padding-top: 3%;
+  padding-left: 10%;
+  width: 50%;
+}
+
+nav ul li {
+  display: inline;
+  padding-right: 10%;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+nav ul li a:hover {
+  padding-bottom: 10px;
+  border-bottom: solid white;
+}
+
+#boxImage {
+  background-image: url('./../images/home.jfif');
+  background-repeat: no-repeat;
+  background-size: cover;
+}

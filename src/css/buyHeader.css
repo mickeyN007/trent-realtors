@@ -1,5 +1,5 @@
 nav ul {
-  display: inline;
+  display: inline-block;
   margin-top: 0;
   padding-left: 10%;
   padding-bottom: 1.5%;

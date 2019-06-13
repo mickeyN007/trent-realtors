@@ -54,14 +54,19 @@ export default class Login extends Component {
         //password = hash
 
         const {method, headers} = mySettings.optionsB
-        var body = {email, password: hash}
+        var body = JSON.stringify({email, password: hash})
         var options = {body, method, headers}
         fetch(mySettings.serverID+'api/login', options)
-        .then(data => {
-          this.setState({loading: false})
+        .then(data => data.json())
+        .then (data => {
+          if (data.status)
+            this.setState({loading: false})
+          else {
+            alert(data.msg)
+          }
         })
-        .catch(err => alert("Can't conect to Trent Realtor's server at the moment"))
-      });
+        .catch(err => alert(err))
+      }.bind(this));
     }
     else{
       this.setState({loading: false})

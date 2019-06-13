@@ -16,14 +16,14 @@ export default class RegisterForm extends Component {
       password: '',
       confirm: '',
       license: '',
-      juridisction: ''
+      jurisdiction: ''
     }
   }
   render() {
     const agents =
     (<div style={styles.row}>
-      <input style={styles.input} placeholder='License' type='password' onChange={(e) => this.setState({password : e.target.value})}/>
-      <input style={styles.input} placeholder='Jurisdiction' type='password' onChange={(e) => this.setState({confirm : e.target.value})}/>
+      <input style={styles.input} placeholder='License' onChange={(e) => this.setState({license : e.target.value})}/>
+      <input style={styles.input} placeholder='Jurisdiction' onChange={(e) => this.setState({jurisdiction : e.target.value})}/>
     </div>)
     const titles = ['Mr', 'Mrs', 'Miss', 'Dr']
     const titleDrpDwn = titles.map((title, key) =>
@@ -76,12 +76,12 @@ export default class RegisterForm extends Component {
       phone,
       confirm,
       license,
-      juridisction
+      jurisdiction
     } = this.state
     var body;
     if (/\S/.test(email) && /\S/.test(password) && /\S/.test(firstname) && /\S/.test(lastname) && /\S/.test(confirm) && /\S/.test(phone)) {
       // if (this.props.who==="AGENT") {
-      //   if (/\S/.test(license) && /\S/.test(juridisction))
+      //   if (/\S/.test(license) && /\S/.test(jurisdiction))
 
       if (confirm !== password)
         alert("Password fields don't match!")
@@ -90,7 +90,7 @@ export default class RegisterForm extends Component {
       bcrypt.hash(password, 10, function(err, hash) {
         //password = hash
         const {method, headers} = mySettings.optionsB
-        var body = {
+        var body = JSON.stringify({
           email,
           password: hash,
           firstname,
@@ -99,13 +99,20 @@ export default class RegisterForm extends Component {
           phone,
           confirm,
           license,
-          juridisction,
+          jurisdiction,
           type: this.props.who
-        }
+        })
         var options = {body, method, headers}
         fetch(mySettings.serverID+'api/register', options)
-        .then(data => {
-          //
+        .then(data => data.json())
+        .then (data => {
+          if (data.status) {
+            alert("Thank you for registering with us!")
+            this.setState({loading: false})
+          }
+          else {
+            alert(data.msg)
+          }
         })
         .catch(err => alert("Can't conect to Trent Realtor's server at the moment"))
       }.bind(this));

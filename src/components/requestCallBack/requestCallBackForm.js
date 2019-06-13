@@ -15,7 +15,6 @@ export default class RequestCallBackForm extends Component {
   }
   render() {
     const display = this.state.active===true ? {display: "block"} : {display: "none"}
-    console.log(this.state.active, display)
 
     return (
       <div style={{...styles.container, ...display}}>
@@ -42,7 +41,31 @@ export default class RequestCallBackForm extends Component {
     //const open = this.props.openModal()
     this.setState({active: true})
   }
+  validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
+  validateInfo() {
+    var err = {
+      status: false,
+      msg: ''
+    }
+    const { firstname, lastname, phone, email } = this.state
+    var validEmail = this.validateEmail(email)
+    if (/\S/.test(phone)==false || /\S/.test(firstname)==false || /\S/.test(lastname)==false || validEmail==false) {
+      if (!validEmail)
+        err.msg = "Please enter a valid email address"
+      else
+        err.msg = "Please fill all fields"
+    }
+    else {
+      err.status = true
+    }
+    return err
+  }
   requestCallBack() {
+    var err = this.validateInfo()
+    if (err.status) {
     const { firstname, lastname, phone, email } = this.state
     const date = new Date()
 
@@ -70,6 +93,10 @@ export default class RequestCallBackForm extends Component {
       alert("Can't connect to Trent Realtor's server at this time.")
     })
   }
+  else {
+    alert(err.msg)
+  }
+}
 }
 
 const styles = {

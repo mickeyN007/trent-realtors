@@ -25,7 +25,16 @@ export default class Home extends Component {
       noAgentFound: false
     }
   }
+  componentWillMount() {
+    var top=0, left=0
+    if (this.props.location.hash == '#ourAgents') {
+        top=500
+        window.scrollTo({ left, top});
+    }
+    window.scrollTo({ left, top});
+  }
   render() {
+
     const listA = [
       "A ddddedicated, full service local licensed real estate agent",
       "A commitment to getting the best price for you",

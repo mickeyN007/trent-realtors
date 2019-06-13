@@ -40,6 +40,10 @@ export default class Buy extends Component {
   search() {
     this.props.search(this.state.location)
   }
+  componentWillMount() {
+    var top=0, left=0
+    window.scrollTo({ left, top});
+  }
 }
 
 const styles = {

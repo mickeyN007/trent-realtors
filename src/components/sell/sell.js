@@ -27,6 +27,10 @@ export default class Sell extends Component {
       cmbOpen: false
     }
   }
+  componentWillMount() {
+    var top=0, left=0
+    window.scrollTo({ left, top});
+  }
   render() {
     const listA = [
       "A dedicated, full service local licensed real estate agent",

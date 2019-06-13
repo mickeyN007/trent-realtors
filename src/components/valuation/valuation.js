@@ -4,21 +4,29 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import AvailableDates from './../availableDates'
 
 import logo from "./../../images/logo.PNG"
+import { mySettings } from "./../../settings"
 
 export default class Valuation extends Component {
   constructor() {
     super()
     this.state = {
-      location: ''
+      location: '',
+      date: null,
+      time: null,
+      firstname: '',
+      lastname: '',
+      phone: '',
+      email: '',
     }
   }
   render() {
-    // availableDatesStyle
+    var availableDatesStyle = (/\S/.test(this.state.location)) ? {opacity: 1} : {opacity: 0.5}
+    var contactStyle = (this.state.date && this.state.time) ? {opacity: 1} : {opacity: 0.5}
     return (
       <div>
         <div style={styles.header}>
           <span><Link to="/"><img src={logo} width="10%" height="50px"/></Link></span>
-          <span style={styles.contact}>24/7 Support &nbsp; (888) 822-8008<hr /></span>
+          <span style={styles.contact}>24/7 Support &nbsp; +234 809 841 0475<hr /></span>
         </div>
         <div style={styles.container}>
           <p><h2><b>Schedule your free, no-obligation listing appointment with a Trent Realtors agent.</b></h2></p>
@@ -27,50 +35,119 @@ export default class Valuation extends Component {
             <span style={{color: "white", marginRight:"10px", backgroundColor: "#B22222", borderRadius: "40%", padding: "0.5%"}}>1</span>
             <span style={{fontSize: "17px"}}><b>We just need a few details from you to get started.</b></span><br />
             <span style={{marginLeft: "4%", fontSize: "17px"}}>What’s your home address?</span><br />
-            <input style={styles.input} type="text" placeholder="Street address" /><br />
+            <input style={styles.input} type="text" placeholder="Street address" onChange={(e) => this.setState({location: e.target.value})}/><br />
             <Link style={{marginLeft: "4%", paddingTop: "2%", paddingBottom: "3%"}} to="/buy/">Enter your address manually</Link>
           </div>
-          <div style={{...styles.whiteBoxes, ...{opacity: 0.5}}}>
+          <div style={{...styles.whiteBoxes, ...availableDatesStyle}}>
             <span style={{color: "white", marginRight:"10px", backgroundColor: "#B22222", borderRadius: "40%", padding: "0.5%"}}>2</span>
             <span style={{fontSize: "17px"}}><b>Select a Date and Time to meet your agent.</b></span><br />
             <span style={{marginLeft: "4%", fontSize: "17px"}}>Choose one of the available dates and times below.</span><br /><br />
 
             <span style={{marginLeft: "4%", float: "left", width: "45%"}}>Date:</span>
             <span style={{marginLeft: "4%", float: "left", width: "45%"}}>Time:</span><br /><br />
-            <span style={{marginLeft: "4%", float: "left", width: "45%"}}><input type="date" /></span>
-            <span style={{marginLeft: "4%", float: "left", width: "45%"}}><input type="time" /></span>
+            <span style={{marginLeft: "4%", float: "left", width: "45%"}}><input type="date" onChange={(e) => this.setState({date: e.target.value})}/></span>
+            <span style={{marginLeft: "4%", float: "left", width: "45%"}}><input type="time" onChange={(e) => this.setState({time: e.target.value})}/></span>
           </div>
-          <div style={{opacity: 0.5}}><AvailableDates /></div>
+          <div style={availableDatesStyle}><AvailableDates /></div>
 
-          <div style={{...styles.location, ...{opacity: 0.5}}}>
+          <div style={{...styles.location, ...contactStyle}}>
             <span style={{color: "white", marginRight:"10px", backgroundColor: "#B22222", borderRadius: "40%", padding: "0.5%"}}>3</span>
             <span style={{fontSize: "17px"}}><b>Contact Information</b></span><br />
             <span style={{marginLeft: "4%", fontSize: "17px"}}>Enter your name, email address and phone number.</span><br />
             <div style={{marginLeft: "4%"}}>
             <div style={styles.left}>
               <p>First name</p>
-              <input style={{width: "80%", padding: "5%"}} type="text" placeholder="First name" /><br />
+              <input style={{width: "80%", padding: "5%"}} type="text" placeholder="First name" onChange={(e) => this.setState({firstname: e.target.value})} /><br />
 
               <p>Phone number</p>
-              <input style={{width: "80%", padding: "5%"}} type="text" placeholder="Phone number" /><br />
+              <input style={{width: "80%", padding: "5%"}} type="text" placeholder="Phone number" onChange={(e) => this.setState({phone: e.target.value})} /><br />
             </div>
             <div style={styles.right}>
               <p>Last name</p>
-              <input style={{width: "80%", padding: "5%"}} type="text" placeholder="Last name" /><br />
+              <input style={{width: "80%", padding: "5%"}} type="text" placeholder="Last name" onChange={(e) => this.setState({lastname: e.target.value})} /><br />
 
               <p>Email address</p>
-              <input style={{width: "80%", padding: "5%"}} type="text" placeholder="Email address" /><br />
+              <input style={{width: "80%", padding: "5%"}} type="text" placeholder="Email address" onChange={(e) => this.setState({email: e.target.value})} /><br />
             </div>
             <div style={{clear: "both", paddingTop: "5%"}}>
             <span>By clicking the Book Appointment button below you agree to </span><br />
             <span>our Terms of Use and Privacy Statement</span>
-            <div style={styles.button}>BOOK APPOINTMENT</div>
+            <div style={styles.button} onClick={this.bookAppt.bind(this)}>
+              BOOK APPOINTMENT
+            </div>
             </div>
           </div>
           </div>
         </div>
       </div>
     )
+  }
+  componentWillMount() {
+    var top=0, left=0
+    window.scrollTo({ left, top});
+  }
+  bookAppt() {
+    var err = this.validateInfo()
+    if (err.status) {
+    const { firstname, lastname, phone,
+    email, location } = this.state
+    //const date = new Date()
+    var { time, date} = this.state
+    var date = new Date(`${date} ${time}`)
+    //var t = `${date.toString() }${time.toString() }`
+
+    fetch(mySettings.serverID+"api/bookAppt", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        firstname, lastname, phone,
+        email, date, location
+      })
+    })
+    .then((data) => {
+      // this.setState({
+      //   firstname: "",
+      //   lastname: "",
+      //   phone: "",
+      //   email: "",
+      //   date: null,
+      //   time: null,
+      //   location: ""
+      // })
+      alert("Your appointment has been scheduled!")
+    })
+    .catch((error) => {
+      alert("Can't connect to Trent Realtor's server at this time.")
+    })
+  }
+  else {
+    alert(err.msg)
+  }
+  }
+  validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
+  validateInfo() {
+    var err = {
+      status: false,
+      msg: ''
+    }
+    const { time, date, location, firstname, lastname, phone, email } = this.state
+    var validEmail = this.validateEmail(email)
+    if (/\S/.test(time)==false || /\S/.test(date)==false || /\S/.test(phone)==false || /\S/.test(firstname)==false || /\S/.test(lastname)==false || validEmail==false) {
+      if (!validEmail)
+        err.msg = "Please enter a valid email address"
+      else
+        err.msg = "Please fill all fields"
+    }
+    else {
+      err.status = true
+    }
+    return err
   }
 }
 

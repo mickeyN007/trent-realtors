@@ -29,6 +29,10 @@ export default class App extends Component {
       location: ''
     }
   }
+  componentWillMount() {
+    var top=0, left=0
+    window.scrollTo({ left, top});
+  }
   render() {
     return (
       <Router>

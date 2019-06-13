@@ -17,7 +17,9 @@ export default class Search extends Component {
       location: ''
     }
   }
-  componentDidMount() {
+  componentWillMount() {
+    var top=0, left=0
+    window.scrollTo({ left, top});
   }
   render() {
     return (

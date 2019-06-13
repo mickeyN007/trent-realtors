@@ -20,6 +20,10 @@ export default class Properties extends Component {
       )
     })
   }
+  componentDidMount() {
+    var top=0, left=0
+    window.scrollTo({ left, top});
+  }
 }
 
 const styles = {

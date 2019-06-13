@@ -9,7 +9,6 @@ export default class Header extends Component {
   }
   render() {
     let colorStyle = (Object.keys(this.props.headerStyle).length != 0) ? {color: "black"} : {}
-    console.log(Object.keys(this.props.headerStyle).length, this.props.headerStyle)
     return (
       <div style={styles.container} id='boxImage'>
         <nav style={this.props.headerStyle}>

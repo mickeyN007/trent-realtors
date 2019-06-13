@@ -55,7 +55,6 @@ export default class Header extends Component {
     )
   }
   toggleLoginModal() {
-    console.log(this.state.showLoginModal)
     if (this.state.showLoginModal) {
       this.setState({showLoginModal: false})
     }

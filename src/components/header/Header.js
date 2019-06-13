@@ -48,7 +48,7 @@ export default class Header extends Component {
         <div style={{marginTop: -20, top: 0, position: 'aboslute', float: 'right', width: '40%', display: 'inline', paddingTop: '3%', paddingBottom: '3%', height: "35%", lineHeight: "35%"}}>
           <div style={styles.topLeftHeader}>
             <span><Link to='/valuation' style={contactStyle}>Book a Listing Appointment </Link></span>
-            <span style={contactStyle}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 24/7 Support &nbsp; (888) 822-8008</span>
+            <span style={contactStyle}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 24/7 Support &nbsp; +234 809 841 0475</span>
           </div>
           <div>
             <span onClick={this.toggleSearchHomes.bind(this)}>{searchForHomes}</span>

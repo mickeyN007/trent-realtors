@@ -108,8 +108,8 @@ export default class Footer extends Component {
             <h3>ADDRESS</h3>
 
             <p>Abuja, Nigeria</p>
-            <p>+234 812 345  6789</p>
-            <p>inquries@trent_realtors.com</p>
+            <p>+234 809 841 0475</p>
+            <p>enquiries@trent_realtors.com</p>
           </div>
         </div>
         <div style={styles.lastFooter}>
@@ -127,19 +127,28 @@ export default class Footer extends Component {
     // verify email
     const email = this.state.email
     // add email to newsletter
-    fetch(mySettings.serverID+"api/subscribe", {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email,
+    if (this.validateEmail(email)) {
+      fetch(mySettings.serverID+"api/subscribe", {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email,
+        })
       })
-    })
-    .then(res => alert("Thank you for subscribing to our newsletter."))
-    .catch(err => alert("Can't connect to Trent Realtor's server at the moment."))
-    //this.props.subscribeToNewsletter(this.state.email)
+      .then(res => alert("Thank you for subscribing to our newsletter."))
+      .catch(err => alert("Can't connect to Trent Realtor's server at the moment."))
+      //this.props.subscribeToNewsletter(this.state.email)
+    }
+    else {
+      alert("Please enter a valid email address")
+    }
+  }
+  validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
   }
 }
 

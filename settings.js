@@ -9,7 +9,7 @@ export const mySettings = {
    //serverID: 'http://192.168.1.2:5000/',
    //serverID: 'http://192.168.8.104:5000/',
    //serverID: 'http://192.168.1.7:5000/',
-   //serverID: 'https://bs-cmsserver.herokuapp.com/',
+   serverID: 'https://bs-cmsserver.herokuapp.com/',
    //serverID: 'http://172.17.15.85:5000/',
    //serverID: 'http://172.17.15.101:5000/',
    //serverID: 'http://172.17.15.96:5000/',
@@ -20,7 +20,7 @@ export const mySettings = {
    //serverID: 'http://192.168.8.101:5000/',
    //serverID: 'http://172.17.15.226:5000/',
    //serverID: 'http://192.168.1.5:5000/',
-   serverID: 'http://192.168.1.4:5000/',
+   //serverID: 'http://192.168.1.4:5000/',
    //serverID:  'http://192.168.8.100:5000/',
    //
    //

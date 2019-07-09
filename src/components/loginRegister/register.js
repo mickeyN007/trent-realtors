@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import { Container, Row, Col,  } from 'react-bootstrap';
+
 import RegisterForm from './registerForm'
 export default class Register extends Component {
   constructor() {
@@ -12,25 +14,31 @@ export default class Register extends Component {
     return (
       <div style={styles.container}>
         <div style={styles.who}>
-          <h1>Who are you registering as?</h1>
-          <div style={styles.options}>
-            <span style={{...styles.option, ...{backgroundColor: this.state.who==='SELLER' ? 'whitesmoke':'white'}}} onClick={this.selectWho.bind(this, 'SELLER')}>
+          <Row>
+          <Col xs={12} lg={12}><h2>Who are you registering as?</h2></Col>
+          </Row>
+          <Row style={styles.options}>
+            <Col xs={4} lg={4}><span style={{...styles.option, ...{backgroundColor: this.state.who==='SELLER' ? 'whitesmoke':'white'}}} onClick={this.selectWho.bind(this, 'SELLER')}>
               SELLER
             </span>
-            <span style={{...styles.option, ...{backgroundColor: this.state.who==='BUYER' ? 'whitesmoke':'white'}}} onClick={this.selectWho.bind(this, 'BUYER')}>
+            </Col>
+            <Col xs={4} lg={4}><span style={{...styles.option, ...{backgroundColor: this.state.who==='BUYER' ? 'whitesmoke':'white'}}} onClick={this.selectWho.bind(this, 'BUYER')}>
               BUYER
-            </span>
-            <span style={{...styles.option, ...{backgroundColor: this.state.who==='AGENT' ? 'whitesmoke':'white'}}} onClick={this.selectWho.bind(this, 'AGENT')}>
+            </span></Col>
+            <Col xs={4} lg={4}><span style={{...styles.option, ...{backgroundColor: this.state.who==='AGENT' ? 'whitesmoke':'white'}}} onClick={this.selectWho.bind(this, 'AGENT')}>
               AGENT
-            </span>
-          </div>
+            </span></Col>
+          </Row>
         </div>
-        {this.state.who && <RegisterForm who={this.state.who}/>}
+        {this.state.who && <RegisterForm toggleView={this.toggleView.bind(this)} who={this.state.who}/>}
       </div>
     )
   }
   selectWho(who) {
     this.setState({who})
+  }
+  toggleView(view) {
+    this.props.toggleView(view)
   }
 }
 
@@ -38,8 +46,10 @@ const styles = {
   container: {
     flex: 1,
     clear: 'both',
-    marginRight: '32%',
-    paddingBottom: '8%'
+    marginRight: '14%',
+    paddingBottom: '8%',
+    fontSize: '18px'
+
   },
   options: {
     height: '50%',
@@ -54,7 +64,7 @@ const styles = {
     padding: '1.5%',
     paddingLeft: '5%',
     paddingRight: '5%',
-    marginRight: '15%'
+    cursor: 'pointer'
   },
   who: {
     paddingTop: '2%',

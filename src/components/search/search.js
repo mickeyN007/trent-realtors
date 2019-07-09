@@ -26,7 +26,6 @@ export default class Search extends Component {
       <div style={styles.container}>
         <div>
           <Header headerStyle={styles.headerStyle} />
-          <Filter location={this.props.location}/>
         </div>
         <div style={styles.displayView}>
           {this.displayView()}
@@ -79,15 +78,7 @@ const styles = {
     padding: "2%"
   },
   headerStyle: {
-    backgroundColor: "#B22222",
-    color: "white",
-    fontWeight: "bold",
-    position: 'fixed',
-    width: '100%',
-    height: "90px",
-    paddingTop: '0',
-    paddingBottom: '0',
-    margin: 0,
+
   },
   left: {
     width: '45%',

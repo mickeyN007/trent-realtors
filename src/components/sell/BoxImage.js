@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 // import images
-import homeImage from './../../images/home.jfif'
+import homeImage from './../../images/manhattan.jpg'
 
 export default class BoxImage extends Component {
   render() {

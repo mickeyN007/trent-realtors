@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import { mySettings } from './../../settings'
 import  bcrypt from 'bcryptjs'
 
-import Loader from './../loader/loader'
-
 export default class Login extends Component {
   constructor() {
     super()
@@ -17,7 +15,7 @@ export default class Login extends Component {
   }
   render() {
     return (
-      <div style={styles.container}>
+      <div style={{...styles.container, ...this.props.loginPadding}}>
         <p><b>Sign In</b></p>
         <div>Enter your email address and password to login.</div>
 
@@ -40,36 +38,38 @@ export default class Login extends Component {
         <div>Don't have an account? <Link to='/LoginRegister'>Register</Link></div>
 
         <div onClick={this.login.bind(this)} style={styles.btn}>SIGN IN</div>
-        <Loader loading={this.state.loading} />
       </div>
     )
+  }
+  toggleLoading(loading) {
+    this.props.toggleLoading(loading)
   }
   login() {
     const { email, password } = this.state
     var body;
     if (/\S/.test(email) && /\S/.test(password)) {
+      this.toggleLoading(true)
       //this.setState({loading: true})
       // enrypt password
-      bcrypt.hash(password, 10, function(err, hash) {
+      // bcrypt.hash(password, 10, function(err, hash) {
         //password = hash
 
         const {method, headers} = mySettings.optionsB
-        var body = JSON.stringify({email, password: hash})
+        var body = JSON.stringify({email, password})
         var options = {body, method, headers}
         fetch(mySettings.serverID+'api/login', options)
         .then(data => data.json())
         .then (data => {
-          if (data.status)
-            this.setState({loading: false})
+          this.toggleLoading(false)
+          if (data.status){
+          }
           else {
             alert(data.msg)
           }
         })
-        .catch(err => alert(err))
-      }.bind(this));
+        .catch(err =>{ alert("Can't conect to Trent Realtor's server at the moment"); this.toggleLoading(false)})
     }
     else{
-      this.setState({loading: false})
       alert('Please fill all fields!')
     }
   }
@@ -78,8 +78,9 @@ export default class Login extends Component {
 const styles = {
   container: {
     backgroundColor: 'white',
-    marginTop: '10%',
+    marginTop: '1%',
     paddingLeft: '2%',
+    paddingTop: '2%',
     paddingRight: '2%',
     position: 'fixed',
     marginLeft: '73%',
@@ -100,6 +101,7 @@ const styles = {
     backgroundColor: "#B22222",
     textAlign: 'center',
     color: 'white',
-    marginBottom: '4%'
+    marginBottom: '4%',
+    cursor: 'pointer'
   }
 }

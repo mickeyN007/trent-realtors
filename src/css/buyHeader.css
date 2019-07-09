@@ -22,11 +22,7 @@ nav ul li a:hover {
   border-bottom: solid white;
 }
 
-#boxImage {
-  background-image: url('./../images/home.jfif');
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+
 
 #boxImageSell {
   background-image: url("https://pbonlineassets.azureedge.net/web-images/marketing-websiteui-us/raster/buy-a-home-tablet@2x.webp");

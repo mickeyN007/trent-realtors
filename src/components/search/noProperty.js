@@ -3,16 +3,19 @@ import React, { Component } from 'react'
 import { Link } from "react-router-dom";
 
 import Map from './../map'
+import { Container, Row, Col, Dropdown,  } from 'react-bootstrap';
 
 export default class NoProperty extends Component {
   render() {
     return (
       <div style={styles.container}>
-        <div style={styles.left}>
+        <Row>
+        <Col xs={12} lg={6}>
           <center><h3><b>Sorry, we are not currently operating in your area:</b></h3></center>
           <center><h1>{this.props.location}</h1></center>
 
           <center>
+
           <div style={styles.box}>
             <p>Buying a property?</p>
             <hr style={{color: '#0080FF'}}/>
@@ -27,10 +30,11 @@ export default class NoProperty extends Component {
             <p>Book a free <Link to='/valuation/'>valuation</Link> and learn more about listing your property with Trent Realtors.</p>
           </div>
           </center>
-        </div>
-        <div style={styles.right}>
+        </Col>
+        <Col xs={12} lg={6}>
           <Map />
-        </div>
+        </Col>
+        </Row>
       </div>
     )
   }
@@ -41,6 +45,10 @@ const styles = {
     backgroundColor: 'red',
     flex: 1,
     backgroundColor: '#F5F5F5',
+    paddingTop: 150,
+    paddingLeft: '3%',
+    paddingRight: '3%',
+
   },
   left: {
     paddingTop: '2%',
@@ -57,7 +65,7 @@ const styles = {
   right: {
     marginTop: '5%',
     width: '55%',
-    float: 'right',
+    float: 'left',
     backgroundColor: 'red',
     backgroundColor: '#F5F5F5',
   },

@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Container, Row, Col,  } from 'react-bootstrap';
+import LoadingScreen from './../loadingScreen'
 
 import './../../css/header.css'
 
@@ -55,7 +57,7 @@ export default class Sell extends Component {
       },
       {
         name: "Get Support at Every Step",
-        desc: "Receive offers, negotiate feedback on your home and schedule open houses and private showings 24/7 through your Purplebricks account. Your agent and our wider customer service team will be with you every step of the way to advise, dialogue with potential buyers, and advocate for you."
+        desc: "Receive offers, negotiate feedback on your home and schedule open houses and private showings 24/7 through your Trent Realtors account. Your agent and our wider customer service team will be with you every step of the way to advise, dialogue with potential buyers, and advocate for you."
       },
       {
         name: "Close With Confidence",
@@ -67,73 +69,84 @@ export default class Sell extends Component {
         <div id='boxImageSell'>
           <Header headerStyle={this.props.headerStyle}  search={this.search.bind(this)} />
         </div>
-        <div>
-          <div style={styles.expectationsLeft}>
-            <p><h3><b>What you will get</b></h3></p>
+        <Container fluid style={{zIndex: 2, paddingTop: '2%'}}>
+        <Row style={styles.featuresHeader}>
+          <Col lg={6} xs={12}>
+            <p><h4><b>What you will get</b></h4></p>
             <p>Our experts are some of the most experienced agents in your area, dedicated to achieving the best results and saving you thousands in commission with our low, fixed fee.</p>
 
               <div><img src={redCheckMark} width="4%" />&nbsp;&nbsp;<b>Dedicated local real estate agent</b></div>
-              <div><img src={redCheckMark} width="4%" />&nbsp;&nbsp;<b>Professional photography suite, yard sign and 3D &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;virtual tour</b></div>
+              <div><img src={redCheckMark} width="4%" />&nbsp;&nbsp;<b>Professional photography suite, yard sign and 3D virtual tour</b></div>
               <div><img src={redCheckMark} width="4%" />&nbsp;&nbsp;<b>Listing on your local MLS and all major listing sites</b></div>
-              <div><img src={redCheckMark} width="4%" />&nbsp;&nbsp;<b>Exclusive early access to buyers through our "Coming &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Soon" listing feature</b></div>
+              <div><img src={redCheckMark} width="4%" />&nbsp;&nbsp;<b>Exclusive early access to buyers through our "Coming Soon" listing feature</b></div>
 
-            <p>Get started by booking a free, no-obligation listing appointment with one of our qualified agents.</p>
+            <br /><p>Get started by booking a free, no-obligation listing appointment with one of our qualified agents.</p>
 
-            <h4><b>Low, fixed fee. Pay only when you sell</b></h4>
-            <Link style={styles.getStarted} to="/valuation/">Get Started</Link>
+            <h5><b>Low, fixed fee. Pay only when you sell</b></h5>
+            <br/><Link style={styles.getStarted} to="/valuation/">Get Started</Link><br/>
 
-          </div>
-          <div style={styles.expectationsRight}>
-            <img src={blackHouse} height="100%" width="100%" alt="Pic not found" />
-          </div>
-          <p style={styles.featuresHeader}><h2><b>Here's what you receive for your low, fixed fee</b></h2></p>
-          <div style={{paddingLeft: '8.5%', backgroundColor: "#f6f6f6", paddingBottom: "16.5%", paddingTop: "3.5%"}}>
+          </Col>
+          <Col lg={6} xs={12} style={{paddingTop: '6%', paddingLeft: '3%'}}>
+            <img src={blackHouse} height="80%" width="100%" alt="Pic not found" />
+          </Col>
+          </Row>
+          <Row>
+          <Col lg={12} xs={12}>
+          <p style={styles.featuresHeader}><h4><b>Here's what you receive for your low, fixed fee</b></h4></p>
+          </Col>
+          </Row>
+          <Row style={{left: 0, right: 0, textAlign: 'center', justifyContent: 'center', backgroundColor: "#f6f6f6",  paddingTop: "3.5%"}}>
             {listA.map((menu) =>
-              <div style={styles.features}>
+              <Col xs={4} lg={3}  style={styles.features}>
                 <center><p>{menu}</p></center>
-              </div>
+              </Col>
             )}
             {listB.map((menu) =>
-              <div style={styles.features}>
+              <Col xs={4} lg={3} style={styles.features}>
                 <center><p>{menu}</p></center>
-                </div>
+                </Col>
             )}
-          </div>
-        </div>
-        <div style={styles.howItWorks}>
-          <p><h2><b>How it works</b></h2></p>
-          <div style={styles.howItWorksLeft}>
-            <img src={blackHouse2} width="100%" height="100%" alt="No pic"/>
-          </div>
-          <div style={styles.howItWorksRight}>
-            <h3><b>Our process</b></h3>
-            <p><b>Here’s what you can expect from the Purplebricks experience.</b></p>
+          </Row>
+        <Row style={styles.featuresHeader}>
+          <Col lg={12} xs={12}>
+          <p><h4><b>How it works</b></h4></p>
+          </Col>
+          <Col lg={6} xs={12}>
+            <br /><h5><b>Our process</b></h5>
+            <p>Here’s what you can expect from the Trent Realtors experience.</p>
             <div>
-              <h4><b>{this.state.ourProcess+1}. {ourProcess[this.state.ourProcess].name}</b></h4>
+              <h5><b>{this.state.ourProcess+1}. {ourProcess[this.state.ourProcess].name}</b></h5><br />
               <p>{ourProcess[this.state.ourProcess].desc}</p>
-              <span onClick={this.previousProcess.bind(this)} style={styles.backButton}><img src={leftArrow} width="10%" /></span>
-              <span onClick={this.nextProcess.bind(this)} style={styles.backButton}><img src={rightArrow} width="10%" /></span>
-              <span style={{fontSize: 45, paddingLeft: "5%"}}>{this.state.ourProcess+1}/4</span>
-              <br /><br /><br /><Link style={styles.getStarted} to="/valuation/">Get started</Link>
+              <span onClick={this.previousProcess.bind(this)} style={styles.backButton}><img src={leftArrow} width="7%" /></span>
+              <span onClick={this.nextProcess.bind(this)} style={styles.backButton}><img src={rightArrow} width="7%" /></span>
+              <span style={{fontSize: 25, paddingLeft: "5%"}}>{this.state.ourProcess+1}/4</span>
+              <br /><br /><Link style={styles.getStarted} to="/valuation/">Get started</Link><br/><br/>
             </div>
-          </div>
-        </div>
-        <div style={styles.letsShowYou}>
-          <h2><b>Let us show you</b></h2>
-          <div style={{paddingTop: "2%", width:"70%", height:"30%", float: "left", width: "30%"}}>
-            <img src={blackHouse3} width="100%" />
-          </div>
-          <div style={{float: "left", width: "50%", paddingLeft: "5%",}}>
+          </Col>
+          <Col lg={6} xs={12}>
+            <img src={blackHouse2} width="90%" height="80%" alt="No pic"/>
+          </Col>
+        </Row>
+        <Row style={styles.featuresHeader}>
+          <Col lg={12} xs={12}>
+            <h4><b>Let us show you</b></h4>
+          </Col>
+          <Col lg={6} xs={12}>
+            <img src={blackHouse3} width="90%" height="80%" alt="No pic"/>
+          </Col>
+          <Col lg={6} xs={12}>
             <p style={{fontSize: 25}}>Schedule your free, no-obligation listing appointment</p>
             <p style={{fontSize: 20, marginBottom: "10%"}}>Your Trent Realtors' agent will work with you to better understand your selling needs and answer any questions you may have.</p>
             <Link style={styles.getStarted} to="/valuation/">BOOK ONLINE</Link>
-            <span onClick={this.openModalB.bind(this)} style={{backgroundColor: "white", borderWidth: "thin", textDecoration: "none",  padding: "2%", color:"black", marginLeft: "5%", borderStyle: "solid", borderColor: "black"}}>REQUEST A CALLBACK</span>
+            <span onClick={this.openModalB.bind(this)} style={{cursor: 'pointer', backgroundColor: "white", borderWidth: "thin", textDecoration: "none",  padding: "2%", color:"black", marginLeft: "5%", borderStyle: "solid", borderColor: "black"}}>REQUEST A CALLBACK</span>
             <RequestCallBackForm
               ref={this.openModal}
             />
-          </div>
-        </div>
+          </Col>
+        </Row>
         <Footer />
+        </Container>
+        {this.state.loading && <LoadingScreen />}
       </div>
     )
   }
@@ -169,7 +182,6 @@ export default class Sell extends Component {
 
 const styles = {
   container: {
-    margin: 0
   },
   expectationsLeft: {
     paddingLeft: '10.5%',
@@ -208,14 +220,15 @@ const styles = {
   },
   featuresHeader: {
      paddingTop: '7.5%',
-     paddingLeft: '10.5%',
-     clear: "both"
+     paddingLeft: '7%',
+     paddingRight: '7%'
   },
   features: {
     backgroundColor: "white",
     width: "25%",
     height: "20%",
     display: "inline",
+    padding: '3%',
     paddingRight: "3%",
     marginLeft: "3%",
     marginBottom: "3%",

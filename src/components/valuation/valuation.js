@@ -2,6 +2,8 @@ import React, { Component } from "react"
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import AvailableDates from './../availableDates'
+import { Container, Row, Col,  } from 'react-bootstrap';
+import Breakpoint, { BreakpointProvider } from 'react-socks';
 
 import logo from "./../../images/logo.PNG"
 import { mySettings } from "./../../settings"
@@ -24,61 +26,129 @@ export default class Valuation extends Component {
     var contactStyle = (this.state.date && this.state.time) ? {opacity: 1} : {opacity: 0.5}
     return (
       <div>
-        <div style={styles.header}>
-          <span><Link to="/"><img src={logo} width="10%" height="50px"/></Link></span>
-          <span style={styles.contact}>24/7 Support &nbsp; +234 809 841 0475<hr /></span>
-        </div>
-        <div style={styles.container}>
-          <p><h2><b>Schedule your free, no-obligation listing appointment with a Trent Realtors agent.</b></h2></p>
-
-          <div style={styles.location}>
-            <span style={{color: "white", marginRight:"10px", backgroundColor: "#B22222", borderRadius: "40%", padding: "0.5%"}}>1</span>
-            <span style={{fontSize: "17px"}}><b>We just need a few details from you to get started.</b></span><br />
-            <span style={{marginLeft: "4%", fontSize: "17px"}}>What’s your home address?</span><br />
-            <input style={styles.input} type="text" placeholder="Street address" onChange={(e) => this.setState({location: e.target.value})}/><br />
-            <Link style={{marginLeft: "4%", paddingTop: "2%", paddingBottom: "3%"}} to="/buy/">Enter your address manually</Link>
-          </div>
-          <div style={{...styles.whiteBoxes, ...availableDatesStyle}}>
-            <span style={{color: "white", marginRight:"10px", backgroundColor: "#B22222", borderRadius: "40%", padding: "0.5%"}}>2</span>
-            <span style={{fontSize: "17px"}}><b>Select a Date and Time to meet your agent.</b></span><br />
-            <span style={{marginLeft: "4%", fontSize: "17px"}}>Choose one of the available dates and times below.</span><br /><br />
-
-            <span style={{marginLeft: "4%", float: "left", width: "45%"}}>Date:</span>
-            <span style={{marginLeft: "4%", float: "left", width: "45%"}}>Time:</span><br /><br />
-            <span style={{marginLeft: "4%", float: "left", width: "45%"}}><input type="date" onChange={(e) => this.setState({date: e.target.value})}/></span>
-            <span style={{marginLeft: "4%", float: "left", width: "45%"}}><input type="time" onChange={(e) => this.setState({time: e.target.value})}/></span>
-          </div>
-          <div style={availableDatesStyle}><AvailableDates /></div>
-
-          <div style={{...styles.location, ...contactStyle}}>
-            <span style={{color: "white", marginRight:"10px", backgroundColor: "#B22222", borderRadius: "40%", padding: "0.5%"}}>3</span>
-            <span style={{fontSize: "17px"}}><b>Contact Information</b></span><br />
-            <span style={{marginLeft: "4%", fontSize: "17px"}}>Enter your name, email address and phone number.</span><br />
-            <div style={{marginLeft: "4%"}}>
-            <div style={styles.left}>
-              <p>First name</p>
-              <input style={{width: "80%", padding: "5%"}} type="text" placeholder="First name" onChange={(e) => this.setState({firstname: e.target.value})} /><br />
-
-              <p>Phone number</p>
-              <input style={{width: "80%", padding: "5%"}} type="text" placeholder="Phone number" onChange={(e) => this.setState({phone: e.target.value})} /><br />
+        <BreakpointProvider>
+          <Breakpoint large up>
+          <Row style={styles.header}>
+            <Col lg={5}><span><Link to="/"><img src={logo} width="30%" height="100%"/></Link></span></Col>
+            <Col lg={7}><span style={styles.contactB}>24/7 Support &nbsp; +234 809 841 0475<hr /></span></Col>
+          </Row>
+          <div style={styles.container}>
+            <Row>
+            <Col xs={12} lg={12}>
+              <p><h2><b>Schedule your free, no-obligation listing appointment with a Trent Realtors agent.</b></h2></p>
+            </Col>
+            </Row>
+            <div style={styles.location}>
+              <span style={{color: "white", marginRight:"10px", backgroundColor: "#B22222", borderRadius: "40%", padding: "0.5%"}}>1</span>
+              <span style={{fontSize: "17px"}}><b>We just need a few details from you to get started.</b></span><br />
+              <span style={{marginLeft: "4%", fontSize: "17px"}}>What’s your home address?</span><br />
+              <input style={styles.input} type="text" placeholder="Street address" onChange={(e) => this.setState({location: e.target.value})}/><br />
+              <Link style={{marginLeft: "4%", paddingTop: "2%", paddingBottom: "3%"}} to="/buy/">Enter your address manually</Link>
             </div>
-            <div style={styles.right}>
-              <p>Last name</p>
-              <input style={{width: "80%", padding: "5%"}} type="text" placeholder="Last name" onChange={(e) => this.setState({lastname: e.target.value})} /><br />
+            <div style={{...styles.whiteBoxes, ...availableDatesStyle}}>
+              <span style={{color: "white", marginRight:"10px", backgroundColor: "#B22222", borderRadius: "40%", padding: "0.5%"}}>2</span>
+              <span style={{fontSize: "17px"}}><b>Select a Date and Time to meet your agent.</b></span><br />
+              <span style={{marginLeft: "4%", fontSize: "17px"}}>Choose one of the available dates and times below.</span><br /><br />
 
-              <p>Email address</p>
-              <input style={{width: "80%", padding: "5%"}} type="text" placeholder="Email address" onChange={(e) => this.setState({email: e.target.value})} /><br />
+              <span style={{marginLeft: "4%", float: "left", width: "45%"}}>Date:</span>
+              <span style={{marginLeft: "4%", float: "left", width: "45%"}}>Time:</span><br /><br />
+              <span style={{marginLeft: "4%", float: "left", width: "45%"}}><input type="date" onChange={(e) => this.setState({date: e.target.value})}/></span>
+              <span style={{marginLeft: "4%", float: "left", width: "45%"}}><input type="time" onChange={(e) => this.setState({time: e.target.value})}/></span>
             </div>
-            <div style={{clear: "both", paddingTop: "5%"}}>
-            <span>By clicking the Book Appointment button below you agree to </span><br />
-            <span>our Terms of Use and Privacy Statement</span>
-            <div style={styles.button} onClick={this.bookAppt.bind(this)}>
-              BOOK APPOINTMENT
+            <div style={availableDatesStyle}><AvailableDates /></div>
+
+            <div style={{...styles.location, ...contactStyle}}>
+              <span style={{color: "white", marginRight:"10px", backgroundColor: "#B22222", borderRadius: "40%", padding: "0.5%"}}>3</span>
+              <span style={{fontSize: "17px"}}><b>Contact Information</b></span><br />
+              <span style={{marginLeft: "4%", fontSize: "17px"}}>Enter your name, email address and phone number.</span><br />
+              <div style={{marginLeft: "4%"}}>
+              <div style={styles.left}>
+                <p>First name</p>
+                <input style={{width: "80%", padding: "5%"}} type="text" placeholder="First name" onChange={(e) => this.setState({firstname: e.target.value})} /><br />
+
+                <p>Phone number</p>
+                <input style={{width: "80%", padding: "5%"}} type="text" placeholder="Phone number" onChange={(e) => this.setState({phone: e.target.value})} /><br />
+              </div>
+              <div style={styles.right}>
+                <p>Last name</p>
+                <input style={{width: "80%", padding: "5%"}} type="text" placeholder="Last name" onChange={(e) => this.setState({lastname: e.target.value})} /><br />
+
+                <p>Email address</p>
+                <input style={{width: "80%", padding: "5%"}} type="text" placeholder="Email address" onChange={(e) => this.setState({email: e.target.value})} /><br />
+              </div>
+              <div style={{clear: "both", paddingTop: "5%"}}>
+              <span>By clicking the Book Appointment button below you agree to </span><br />
+              <span>our Terms of Use and Privacy Statement</span>
+              <div style={styles.button} onClick={this.bookAppt.bind(this)}>
+                BOOK APPOINTMENT
+              </div>
+              </div>
             </div>
             </div>
           </div>
+          </Breakpoint>
+          <Breakpoint medium down>
+          <Row style={styles.header}>
+            <Col xs={12}><span><Link to="/"><img src={logo} width="30%" height="100%"/></Link></span></Col>
+            <Col xs={12}><span style={styles.contact}>24/7 Support &nbsp; +234 809 841 0475<hr /></span></Col>
+          </Row>
+          <div style={styles.containerB}>
+            <Row>
+            <Col xs={12} lg={12}>
+              <p><h2><b>Schedule your free, no-obligation listing appointment with a Trent Realtors agent.</b></h2></p>
+            </Col>
+            </Row>
+            <div style={styles.location}>
+              <span style={{color: "white", marginRight:"10px", backgroundColor: "#B22222", borderRadius: "40%", padding: "0.5%"}}>1</span>
+              <span style={{fontSize: "17px"}}><b>We just need a few details from you to get started.</b></span><br />
+              <span style={{marginLeft: "4%", fontSize: "17px"}}>What’s your home address?</span><br />
+              <input style={styles.input} type="text" placeholder="Street address" onChange={(e) => this.setState({location: e.target.value})}/><br />
+              <Link style={{marginLeft: "4%", paddingTop: "2%", paddingBottom: "3%"}} to="/buy/">Enter your address manually</Link>
+            </div>
+            <div style={{...styles.whiteBoxes, ...availableDatesStyle}}>
+              <span style={{color: "white", marginRight:"10px", backgroundColor: "#B22222", borderRadius: "40%", padding: "0.5%"}}>2</span>
+              <span style={{fontSize: "17px"}}><b>Select a Date and Time to meet your agent.</b></span><br />
+              <span style={{marginLeft: "4%", fontSize: "17px"}}>Choose one of the available dates and times below.</span><br /><br />
+
+              <span style={{marginLeft: "4%", float: "left", width: "45%"}}>Date:</span>
+              <span style={{marginLeft: "4%", float: "left", width: "45%"}}>Time:</span><br /><br />
+              <span style={{marginLeft: "4%", float: "left", width: "45%"}}><input type="date" onChange={(e) => this.setState({date: e.target.value})}/></span>
+              <span style={{marginLeft: "4%", float: "left", width: "45%"}}><input type="time" onChange={(e) => this.setState({time: e.target.value})}/></span>
+            </div>
+            <div style={availableDatesStyle}><AvailableDates /></div>
+
+            <div style={{...styles.location, ...contactStyle}}>
+              <span style={{color: "white", marginRight:"10px", backgroundColor: "#B22222", borderRadius: "40%", padding: "0.5%"}}>3</span>
+              <span style={{fontSize: "17px"}}><b>Contact Information</b></span><br />
+              <span style={{marginLeft: "4%", fontSize: "17px"}}>Enter your name, email address and phone number.</span><br />
+              <div style={{marginLeft: "4%"}}>
+              <div style={styles.left}>
+                <p>First name</p>
+                <input style={{width: "80%", padding: "5%"}} type="text" placeholder="First name" onChange={(e) => this.setState({firstname: e.target.value})} /><br />
+
+                <p>Phone number</p>
+                <input style={{width: "80%", padding: "5%"}} type="text" placeholder="Phone number" onChange={(e) => this.setState({phone: e.target.value})} /><br />
+              </div>
+              <div style={styles.right}>
+                <p>Last name</p>
+                <input style={{width: "80%", padding: "5%"}} type="text" placeholder="Last name" onChange={(e) => this.setState({lastname: e.target.value})} /><br />
+
+                <p>Email address</p>
+                <input style={{width: "80%", padding: "5%"}} type="text" placeholder="Email address" onChange={(e) => this.setState({email: e.target.value})} /><br />
+              </div>
+              <div style={{clear: "both", paddingTop: "5%"}}>
+              <span>By clicking the Book Appointment button below you agree to </span><br />
+              <span>our Terms of Use and Privacy Statement</span>
+              <div style={styles.buttonB} onClick={this.bookAppt.bind(this)}>
+                BOOK APPOINTMENT
+              </div>
+              </div>
+            </div>
+            </div>
           </div>
-        </div>
+          </Breakpoint>
+
+        </BreakpointProvider>
       </div>
     )
   }
@@ -154,12 +224,15 @@ export default class Valuation extends Component {
 const styles = {
   container: {
     marginLeft: "15%",
-    marginRight: "15%",
-    width: "50%"
+    marginRight: "25%",
+  },
+  containerB: {
+    marginLeft: "5%",
+    marginRight: "5%",
   },
   header: {
-    paddingBottom: "1.5%",
-    paddingTop: "2%",
+    paddingBottom: "1%",
+    paddingTop: "1%",
     marginBottom: "1.5%",
     paddingLeft: "15%",
     backgroundColor: "#B22222",
@@ -176,8 +249,14 @@ const styles = {
   contact: {
     color: 'white',
     float: 'right',
-    marginRight: '22%',
-    paddingTop: '1.5%'
+    marginRight: '34.5%',
+    paddingTop: '1.5%',
+  },
+  contactB: {
+    paddingTop: '2%',
+    color: 'white',
+    float: 'right',
+    paddingRight: '45%'
   },
   logo: {
     float: 'left'
@@ -202,11 +281,21 @@ const styles = {
     marginTop: "4%"
   },
   button: {
-    width: "30%",
+    width: "40%",
     backgroundColor: "#B22222",
     color: "white",
     padding: "2%",
     paddingLeft: "10%",
-    marginTop: "3%"
+    marginTop: "3%",
+    cursor: 'pointer'
+  },
+  buttonB: {
+    width: "60%",
+    backgroundColor: "#B22222",
+    color: "white",
+    padding: "2%",
+    paddingLeft: "10%",
+    marginTop: "3%",
+    cursor: 'pointer'
   }
 }

@@ -11,7 +11,7 @@ nav ul li {
 }
 
 nav ul li a {
-  color: white;
+  color: red;
   text-decoration: none;
   font-weight: bold;
   font-size: 17px;
@@ -21,15 +21,46 @@ nav ul li a:hover {
   padding-bottom: 10px;
   border-bottom: solid white;
 }
-
+#availableHouses {
+  background-image: linear-gradient(to right bottom, #daa520, #b0b131, #86b750, #5eb972, #37b892, #4abd9c, #5cc1a6, #6cc6af, #94d4b0, #b9e1b6, #dbedc2, #fafad2);
+}
 #boxImage {
-  background-image: url('./../images/home.jfif');
-  background-repeat: no-repeat;
+  background: url('./../images/manhattan.jpg') no-repeat 0 -120px;
   background-size: cover;
+  height: 550px;
+}
+
+#boxImageB {
+  background: url('./../images/manhattan.jpg') no-repeat 0 -90px;
+  background-size: cover;
+  height: 400px;
 }
 
 #boxImageSell {
   background-image: url("https://pbonlineassets.azureedge.net/web-images/marketing-websiteui-us/raster/buy-a-home-tablet@2x.webp");
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.menu-item {
+  padding: 0 40px;
+  margin: 5px 10px;
+  user-select: none;
+  cursor: pointer;
+  border: none;
+}
+.menu-item-wrapper.active {
+  border: 1px blue solid;
+}
+.menu-item.active {
+  border: 1px green solid;
+}
+
+.scroll-menu-arrow {
+  padding: 20px;
+  cursor: pointer;
+}
+
+div, p {
+  font-family: Helvetica;
 }

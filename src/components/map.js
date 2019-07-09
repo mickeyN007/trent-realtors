@@ -17,7 +17,7 @@ export default class Maps extends Component {
       return (
          <MapWithAMarker
             containerElement={<div style={{ marginTop: '3%', zIndex: 1, height: `600px` }} />}
-            mapElement={<div style={{ position: 'fixed', zIndex: 1, height: `90%`, width: `100%` }} />}
+            mapElement={<div style={{ position: 'fixed', zIndex: 1, height: `90%`, width: `90%` }} />}
          />
       )
    }

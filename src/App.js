@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+// import Admin from "./components/admin/layouts/Admin.jsx";
 
 // router
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { mySettings } from './settings.js'
+//import './css/main.css'
 
 // imported components
 import Home from './components/home/Home'
@@ -13,20 +15,30 @@ import Buy from './components/buy/buy'
 import Valuation from './components/valuation/valuation'
 import Search from './components/search/search'
 import LoginRegister from './components/loginRegister/loginRegister'
+import Account from './components/account/account'
+// import Admin from "layouts/Admin.jsx";
+
+import { createBrowserHistory } from "history";
+
+const hist = createBrowserHistory();
 
 export default class App extends Component {
   constructor() {
     super()
     this.state = {
       headerStyle: {
+        zIndex: 9999999999999,
       },
       headerStyleB: {
+        zIndex: 9999999999999,
       },
       headerStyleSet: false,
       searchForHomes: false,
       properties: [],
       agents: [],
-      location: ''
+      location: '',
+      username: 'Michael',
+      availableHouses: [],
     }
   }
   componentWillMount() {
@@ -35,13 +47,14 @@ export default class App extends Component {
   }
   render() {
     return (
-      <Router>
+      <Router history={hist}>
         <div>
           <Route
             exact={true}
             path="/"
             render={(props) =>
               <Home {...props}
+                availableHouses={this.state.availableHouses}
                 search={this.search.bind(this)}
                 findAgent={this.findAgent.bind(this)}
                 headerStyle={this.state.headerStyle}
@@ -73,6 +86,7 @@ export default class App extends Component {
             render={
               (props) =>
               <Home {...props}
+                availableHouses={this.state.availableHouses}
                 search={this.search.bind(this)}
                 //subscribeToNewsletter={this.subscribeToNewsletter.bind(this)}
                 findAgent={this.findAgent.bind(this)}/>
@@ -83,6 +97,14 @@ export default class App extends Component {
             render={(props) =>
               <Valuation {...props}
 
+              />
+            }
+          />
+          <Route
+            path="/account/"
+            render={(props) =>
+              <Account {...props}
+                username={this.state.username}
               />
             }
           />
@@ -104,18 +126,26 @@ export default class App extends Component {
               />
             }
           />
+
         </div>
       </Router>
     );
   }
   componentDidMount() {
+    this.getAvailableHouses()
     window.addEventListener('scroll', this.listenScrollEvent.bind(this))
+  }
+  changePage(page) {
+    //
   }
   findAgent(zipCode) {
     return {error: true}
   }
   hideSearchBox() {
     this.setState({searchForHomes: false})
+  }
+  saveData(data) {
+    Window.sessionStorage.setItem('user', data);
   }
   hideMenuItems() {
     if (this.state.searchForHomes) {
@@ -142,6 +172,10 @@ export default class App extends Component {
   subscribeToNewsletter(email) {
     //console.log(email)
   }
+  getAvailableHouses() {
+    console.log(99999)
+    this.setState({availableHouses: [{name: "Apo", images: ['/images/account.png']}, {name: "Garki", images: []}, {name: "Maitama", images: []}, {name: "Area 1", images: ['./images/account.png']}, {name: "Wuye", images: []}, {name: "Asokoro", images: []}]})
+  }
   listenScrollEvent(e) {
     let { headerStyleSet } = this.state
     let headerStyle = {
@@ -149,9 +183,8 @@ export default class App extends Component {
       color: "black",
       fontWeight: "bold",
       position: 'fixed',
-      width: '100%',
-      height: "120px",
-      paddingTop: '0',
+      height: "100px",
+      paddingTop: '2%',
       paddingBottom: '0',
       margin: 0,
       borderColor: "#B22222",
@@ -162,9 +195,8 @@ export default class App extends Component {
       color: "white",
       fontWeight: "bold",
       position: 'fixed',
-      width: '100%',
-      height: "90px",
-      paddingTop: '0',
+      height: "100px",
+      paddingTop: '2%',
       paddingBottom: '0',
       margin: 0,
     }

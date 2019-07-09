@@ -18,7 +18,7 @@ export default class RequestCallBackForm extends Component {
 
     return (
       <div style={{...styles.container, ...display}}>
-          <h2>Book your appointment by phone</h2>
+          <h4>Book your appointment by phone</h4>
           <p>Enter your name, email and phone number and we'll call you back</p>
           <span onClick={this.closeModal.bind(this)} style={{float: "right", clear: "right"}}>X</span>
           <div style={styles.left}>
@@ -39,7 +39,7 @@ export default class RequestCallBackForm extends Component {
   }
   openModal() {
     //const open = this.props.openModal()
-    this.setState({active: true})
+    this.setState({active: !this.state.active})
   }
   validateEmail(email) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -101,6 +101,7 @@ export default class RequestCallBackForm extends Component {
 
 const styles = {
   container: {
+    paddingTop: '5%',
     paddingLeft: "5%",
     paddingRight: "1.5%",
     borderStyle: "thin",
@@ -119,7 +120,8 @@ const styles = {
     color: "white",
     width: "30%",
     alignItems: "center",
-    padding: "2%"
+    padding: "2%",
+    cursor: 'pointer'
   },
   input: {
     width: "80%",

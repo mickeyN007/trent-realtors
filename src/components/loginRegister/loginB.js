@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 import { Link } from "react-router-dom";
 import  bcrypt from 'bcryptjs'
 
-import Loader from './../loader/loader'
+import LoadingScreen from './../loadingScreen'
+import { Container, Row, Col, Dropdown,  } from 'react-bootstrap';
 
 import { mySettings } from './../../settings'
 
@@ -19,43 +20,46 @@ export default class LoginB extends Component {
   render() {
     return (
       <div style={styles.container}>
-        <div style={styles.credentials}>
-          <div style={styles.cred}>
-            <p style={{left: 0}}>Email Address</p>
+        <Row style={styles.row}>
+          <Col xs={12} lg={6}>
+            <p style={{marginLeft: '-64%'}}>Email Address</p>
             <input
               type='email'
               style={styles.input}
               placehoder='Email Address'
               onChange={(e) => this.setState({email: e.target.value})}
             />
-          </div>
-          <div style={{marginLeft: '6.7%', float: 'left'}}> &nbsp;</div>
-          <div style={styles.cred}>
-            <p>Password</p>
+          </Col>
+          <Col xs={12} lg={6} >
+            <p style={{marginLeft: '-72%'}}>Password</p>
             <input
               type='password'
               style={styles.input}
               placehoder='Password'
               onChange={(e) => this.setState({password: e.target.value})}
             />
-          </div>
-        </div>
-        <div style={styles.options}>
-        <div style={styles.forgot}>
+          </Col>
+        </Row>
+        <Row style={styles.row}>
+        <Col xs={12} lg={8} style={{marginLeft: '-14%'}}>
           <Link to="/forgot/">Forgotten your password?</Link>
-        </div>
-        <div style={styles.btn} onClick={this.login.bind(this)}>
+        </Col>
+        <Col xs={12} lg={4} style={styles.btn} onClick={this.login.bind(this)}>
           SIGN IN
-        </div>
-        </div>
-        <Loader loading={this.state.loading} />
+        </Col>
+        </Row>
+        {this.state.loading && <LoadingScreen />}
       </div>
     )
+  }
+  toggleLoading(loading) {
+    this.setState({loading})
   }
   login() {
     const { email, password } = this.state
     var body;
     if (/\S/.test(email) && /\S/.test(password)) {
+      this.toggleLoading(true)
       // enrypt password
       //this.setState({loading: true})
       bcrypt.hash(password, 10, function(err, hash) {
@@ -67,17 +71,18 @@ export default class LoginB extends Component {
         fetch(mySettings.serverID+'api/login', options)
         .then(data => data.json())
         .then (data => {
+          this.toggleLoading(false)
+
           if (data.status)
             this.setState({loading: false})
           else {
             alert(data.msg)
           }
         })
-        .catch(err => alert("Can't conect to Trent Realtor's server at the moment"))
+        .catch(err =>{ alert("Can't conect to Trent Realtor's server at the moment"); this.toggleLoading(false)})
       }.bind(this));
     }
     else{
-      this.setState({loading: false})
       alert('Please fill all fields!')
     }
   }
@@ -88,11 +93,12 @@ const styles = {
     flex: 1,
     paddingTop: '7%',
     backgroundColor: 'white',
-    marginRight: '32%'
+    marginRight: '14%',
+    fontSize: '18px'
 
   },
   options: {
-    width: '90%',
+    width: '100%',
     clear: 'both',
     paddingTop: '5%',
     paddingBottom: '10%',
@@ -106,22 +112,27 @@ const styles = {
     height: '20%'
   },
   input: {
-    padding: '2.5%',
-    width: '70%'
-  },
-  forgot: {
-    float: 'left'
+    width: '100%'
   },
   btn: {
     width: '20%',
     padding: '2%',
     color: 'white',
-    marginRight: '5%',
     backgroundColor: '#B22222',
-    float: 'right'
+    cursor: 'pointer',
+    marginBottom: '3%'
+
   },
   cred: {
     width: '45%',
     float: 'left'
-  }
+  },
+  row: {
+    paddingTop: '3%',
+    height: '20%',
+    backgroundColor: 'white',
+    //paddingRight: '1%',
+    width: '100%',
+    clear: 'both'
+  },
 }

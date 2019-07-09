@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Container, Row, Col, Dropdown,  } from 'react-bootstrap';
 
 export default class Filter extends Component {
   constructor() {
@@ -12,16 +13,16 @@ export default class Filter extends Component {
   render() {
     return (
       <div style={styles.container}>
-        <div>
-          <span><input placeholder='search'  onChange={(e) => this.setState({location: e.target.value})} value={this.props.location}  style={styles.dropdown}/></span>
-          <span style={styles.dropdown} onClick={this.displayDropDown.bind(this, 'propertyTypes')}>Property Type</span>
-          <span style={styles.dropdown} onClick={this.displayDropDown.bind(this, 'minPrice')}>Price (min)</span>
-          <span style={styles.dropdown} onClick={this.displayDropDown.bind(this, 'maxPrice')}>Price (max)</span>
-          <span style={styles.dropdown} onClick={this.displayDropDown.bind(this, 'beds')}>Beds</span>
-          <span style={styles.dropdown} onClick={this.displayDropDown.bind(this, 'baths')}>Baths</span>
+        <Row>
+          <Col xs={6} lg={2}><input placeholder='search'  onChange={(e) => this.setState({location: e.target.value})} value={this.props.location}  style={styles.dropdown}/></Col>
+          <Col xs={6} lg={2} style={styles.dropdown} onClick={this.displayDropDown.bind(this, 'propertyTypes')}>Property Type</Col>
+          <Col xs={6} lg={2} style={styles.dropdown} onClick={this.displayDropDown.bind(this, 'minPrice')}>Price (min)</Col>
+          <Col xs={6} lg={2} style={styles.dropdown} onClick={this.displayDropDown.bind(this, 'maxPrice')}>Price (max)</Col>
+          <Col xs={6} lg={1} style={styles.dropdown} onClick={this.displayDropDown.bind(this, 'beds')}>Beds</Col>
+          <Col xs={6} lg={1} style={styles.dropdown} onClick={this.displayDropDown.bind(this, 'baths')}>Baths</Col>
 
-          <span style={styles.dropdown} onClick={this.toggleMoreFilters.bind(this)}>More Filters</span>
-        </div>
+          <Col xs={6} lg={1} style={styles.dropdown} onClick={this.toggleMoreFilters.bind(this)}>More Filters</Col>
+        </Row>
         {
           this.state.moreFilter === true &&
             <div style={styles.moreFilterRowA}>
@@ -63,13 +64,14 @@ const styles = {
     marginTop:'6%',
     paddingLeft: '10%',
     paddingRight: '10%',
-    paddingTop: '2%'
+    paddingTop: '4%',
+    paddingBottom: '5%'
   },
   dropdown: {
-    padding: '0.5%',
-    marginRight: '2%',
+    textAlign: 'center',
     borderStyle: 'solid',
-    borderWidth: 1
+    borderWidth: 1,
+    marginRight: '1%'
   },
   moreFilterRowA: {
     position: 'fixed',

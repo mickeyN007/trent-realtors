@@ -173,7 +173,6 @@ export default class App extends Component {
     //console.log(email)
   }
   getAvailableHouses() {
-    console.log(99999)
     this.setState({availableHouses: [{name: "Apo", images: ['/images/account.png']}, {name: "Garki", images: []}, {name: "Maitama", images: []}, {name: "Area 1", images: ['./images/account.png']}, {name: "Wuye", images: []}, {name: "Asokoro", images: []}]})
   }
   listenScrollEvent(e) {

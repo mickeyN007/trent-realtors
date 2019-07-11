@@ -14,6 +14,7 @@ const MenuItem = ({house, selected}) => {
     style={{ position: 'relative', height: '100%', width: '95%', background: `url('${img}') no-repeat center center`, backgroundSize: '400px 300px' }}
     className={`menu-item ${(selected==house.name) ? '.active' : ''}`}
     >
+    <div style={styles.type}>{house.type}</div>
 
     <div style={styles.name}><p>{house.name}</p></div>
     </div>;
@@ -105,6 +106,17 @@ const styles = {
     display: 'flex',
     flex: 1,
     backgroundImage: 'linear-gradient(to right, #B22222 , #db4545)',
+  },
+  type: {
+    position: 'absolute',
+    right: 10,
+    top: 10,
+    borderWidth: 1,
+    borderRadius: 50,
+    padding: 5,
+    color: 'black',
+    fontWeight: 'bold',
+    backgroundColor: 'white'
   },
   controls:{
     position: 'absolute',

@@ -38,7 +38,7 @@ export default class App extends Component {
       agents: [],
       location: '',
       username: 'Michael',
-      availableHouses: [],
+      sponsoredHouses: [],
     }
   }
   componentWillMount() {
@@ -54,7 +54,7 @@ export default class App extends Component {
             path="/"
             render={(props) =>
               <Home {...props}
-                availableHouses={this.state.availableHouses}
+                sponsoredHouses={this.state.sponsoredHouses}
                 search={this.search.bind(this)}
                 findAgent={this.findAgent.bind(this)}
                 headerStyle={this.state.headerStyle}
@@ -86,7 +86,7 @@ export default class App extends Component {
             render={
               (props) =>
               <Home {...props}
-                availableHouses={this.state.availableHouses}
+                sponsoredHouses={this.state.sponsoredHouses}
                 search={this.search.bind(this)}
                 //subscribeToNewsletter={this.subscribeToNewsletter.bind(this)}
                 findAgent={this.findAgent.bind(this)}/>
@@ -132,7 +132,7 @@ export default class App extends Component {
     );
   }
   componentDidMount() {
-    this.getAvailableHouses()
+    this.sponsoredHouses()
     window.addEventListener('scroll', this.listenScrollEvent.bind(this))
   }
   changePage(page) {
@@ -172,8 +172,15 @@ export default class App extends Component {
   subscribeToNewsletter(email) {
     //console.log(email)
   }
-  getAvailableHouses() {
-    this.setState({availableHouses: [{name: "Apo", images: ['/images/account.png']}, {name: "Garki", images: []}, {name: "Maitama", images: []}, {name: "Area 1", images: ['./images/account.png']}, {name: "Wuye", images: []}, {name: "Asokoro", images: []}]})
+  sponsoredHouses() {
+    this.setState({
+      sponsoredHouses:
+        [
+          {name: "69th road Gwarinpa estate Abuja", images: ['https://i.ibb.co/Y7vfqdR/20190502-132402.jpg','https://i.ibb.co/rQrrtvB/20190502-132332.jpg', 'https://i.ibb.co/7y0MbJX/20190502-132425.jpg',]},
+          {name: "AB Close off 1st Avenue Gwarinpa ", images: ['https://i.ibb.co/RHdprzd/20181226-132113.jpg']},
+          {name: "Off Lake Chad, Maitama", images: ['https://i.ibb.co/bJJ6yG7/IMG-20190507-WA0062.jpg']},
+        ]
+      })
   }
   listenScrollEvent(e) {
     let { headerStyleSet } = this.state

@@ -7,7 +7,7 @@ import './../../css/header.css'
 import Header from './../header/Header'
 import BoxImage from './BoxImage'
 import Footer from './../footer/footer'
-import AvailableHouses from './../ads/availableHouses'
+import SponsoredHouses from './../ads/sponsoredHouses'
 import LoadingScreen from './../loadingScreen'
 import Slider from 'react-animated-slider';
 import horizontalCss from 'react-animated-slider/build/horizontal.css';
@@ -91,7 +91,7 @@ export default class Home extends Component {
         <Container style={{zIndex: 2, paddingLeft: '2%', paddingTop: '2%',}}>
         <Row>
           <Col lg={12} xs={12}>
-            <AvailableHouses availableHouses={this.props.availableHouses}/>
+            <SponsoredHouses sponsoredHouses={this.props.sponsoredHouses}/>
           </Col>
         </Row>
         <Row>

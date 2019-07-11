@@ -25,7 +25,7 @@ nav ul li a:hover {
   background-image: linear-gradient(to right bottom, #daa520, #b0b131, #86b750, #5eb972, #37b892, #4abd9c, #5cc1a6, #6cc6af, #94d4b0, #b9e1b6, #dbedc2, #fafad2);
 }
 #boxImage {
-  background: url('./../images/manhattan.jpg') no-repeat 0 -120px;
+  background: url('./../images/manhattan.jpg') no-repeat 0 -20px;
   background-size: cover;
   height: 550px;
 }

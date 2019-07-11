@@ -11,7 +11,7 @@ const MenuItem = ({house, selected}) => {
   var img = house.images[0]
   console.log(img)
   return <div
-    style={{ position: 'relative', height: '100%', width: '95%', background: `url('${img}') no-repeat center center` }}
+    style={{ position: 'relative', height: '100%', width: '95%', background: `url('${img}') no-repeat center center`, backgroundSize: '400px 300px' }}
     className={`menu-item ${(selected==house.name) ? '.active' : ''}`}
     >
 

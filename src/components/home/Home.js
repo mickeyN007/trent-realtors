@@ -78,7 +78,7 @@ export default class Home extends Component {
         <p>We want to make sure we have the most accurate information in order to get you the best price so let's talk.</p>
 
         <b>Call us at:</b>
-        <p>(888) 822-8008 24 hours a day, 7 days a week</p>
+        <p>(+234)-8098-410-475 24 hours a day, 7 days a week</p>
         <p>If you'd like to try a new search, please enter a new zip code.</p>
       </div>
     var id = (window.screen.width>637) ? 'boxImage' : 'boxImageB'

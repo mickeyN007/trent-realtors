@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 
 //import './../../css/buyHeader.css'
-import Header from './../header/HeaderC'
 import Footer from './../footer/footer'
 
 import Filter from './filter'
@@ -24,9 +23,6 @@ export default class Search extends Component {
   render() {
     return (
       <div style={styles.container}>
-        <div>
-          <Header headerStyle={styles.headerStyle} />
-        </div>
         <div style={styles.displayView}>
           {this.displayView()}
         </div>
@@ -34,14 +30,27 @@ export default class Search extends Component {
     )
   }
   displayView() {
-    const views = {
+    if (this.props.location.state==undefined) {
+      this.props.location.state = {
+        house: {}, properties:[]
+      }
+      const views = {
+          notfound: <NoProperty location={this.props.location} />,
+          found: <Properties {...this.props}  />
+        }
+        if (this.props.location.state.properties.length > 0) {
+          return views['found']
+        }
+        else return views['notfound']}
+    else
+  {  const views = {
       notfound: <NoProperty location={this.props.location} />,
-      found: <Properties location={this.props.location} properties={this.props.properties} />
+      found: <Properties {...this.props} house={this.props.location.state.house} sponsoredHouses={this.props.location.state.properties} />
     }
-    if (this.props.properties.length > 0) {
+    if (this.props.location.state.properties.length > 0) {
       return views['found']
     }
-    else return views['notfound']
+    else return views['notfound']}
   }
   // componentWillReceiveProps(props) {
   //   const { location } = this.props
@@ -58,10 +67,9 @@ export default class Search extends Component {
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: 'gray',
   },
   displayView: {
-
+    flex: 1
   },
   in: {
     width: "60%",
@@ -77,9 +85,7 @@ const styles = {
   search: {
     padding: "2%"
   },
-  headerStyle: {
 
-  },
   left: {
     width: '45%',
     float: 'left'

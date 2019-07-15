@@ -120,7 +120,7 @@ export default class App extends Component {
             path="/search/"
             render={(props) =>
               <Search {...props}
-                  location={this.state.location}
+                  //location={this.state.location}
                   properties={this.state.properties}
                   search={this.search.bind(this)}
               />
@@ -162,11 +162,25 @@ export default class App extends Component {
     .then(data => {
       const { properties } = data
       this.setState({properties})
-      window.location.href = "/search";
+      hist.push({
+        pathname: '/search',
+        state: {
+          properties,
+          house: {},
+          location
+        }
+      })
       //return {data, error: "Success"}
     })
     .catch(err => {
-      window.location.href = "/search";
+      hist.push({
+        pathname: '/search',
+        state: {
+          properties: [],
+          house: {},
+          location
+        }
+      })
     })
   }
   subscribeToNewsletter(email) {
@@ -176,11 +190,11 @@ export default class App extends Component {
     this.setState({
       sponsoredHouses:
         [
-          {type: 'Sale', name: "Off 69th road Gwarinpa estate Abuja", images: ['https://i.ibb.co/Y7vfqdR/20190502-132402.jpg','https://i.ibb.co/rQrrtvB/20190502-132332.jpg', 'https://i.ibb.co/7y0MbJX/20190502-132425.jpg',]},
-          {type: 'Rent', name: "AB Close off 1st Avenue Gwarinpa ", images: ['https://i.ibb.co/RHdprzd/20181226-132113.jpg']},
-          {type: 'Sale', name: "Off Lake Chad, Maitama", images: ['https://i.ibb.co/bJJ6yG7/IMG-20190507-WA0062.jpg']},
-          {type: 'Sale', name: "By sigma apartment Jabi", images: ['https://i.ibb.co/kc4CYjD/sigma.jpg']},
-          {type: 'Sale', name: "Efab Metropolis Gwarinpa", images: ['https://i.ibb.co/RbK23Z7/Efab-Metropolis-Gwarinpa.jpg']}
+          {price: '2000000', neighborhood: 'Great established neighborhood about 15 minute walk up Main Street to downtown shops and restaurants. Napa neighborhoods/streets are very diverse regarding types of houses, parking, etc. The Farmhouse sits on beautiful part of Main Street with great parking.', description: 'Completely renovated quality 31-foot Airstream in the backyard of the Main Street Farmhouse. Sealy Posturpedic Full bed, bathroom, kitchenette, couch, dinette, flatscreen TV and wifi. Sorry, NO PETS allowed. We allow cooking our farm fresh eggs but no cooking meats, bacon, sausage, fish, etc. in the unit. Not suitable for children under the age of 12 years. Community fee (local lodging tax of 14%) is added to reservation when confirmed by guest.', features: [], type: 'Sale', name: "Off 69th road Gwarinpa estate Abuja", images: ['https://i.ibb.co/Y7vfqdR/20190502-132402.jpg','https://i.ibb.co/rQrrtvB/20190502-132332.jpg', 'https://i.ibb.co/7y0MbJX/20190502-132425.jpg',]},
+          {price: '2000000', neighborhood: '', description: '', features: ['3 Bedrooms', '3 Toilets', '3 Kitchens'], type: 'Rent', name: "AB Close off 1st Avenue Gwarinpa ", images: ['https://i.ibb.co/RHdprzd/20181226-132113.jpg']},
+          {price: '2000000', neighborhood: '', description: '', features: [], type: 'Sale', name: "Off Lake Chad, Maitama", images: ['https://i.ibb.co/bJJ6yG7/IMG-20190507-WA0062.jpg']},
+          {price: '2000000', neighborhood: '', description: '', features: [], type: 'Sale', name: "By sigma apartment Jabi", images: ['https://i.ibb.co/kc4CYjD/sigma.jpg']},
+          {price: '2000000', neighborhood: '', description: '', features: [], type: 'Sale', name: "Efab Metropolis Gwarinpa", images: ['https://i.ibb.co/RbK23Z7/Efab-Metropolis-Gwarinpa.jpg']}
         ]
       })
   }

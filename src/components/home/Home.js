@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Container, Row, Col,  } from 'react-bootstrap';
 
 import './../../css/header.css'
+// import AvailableHouses from './../ads/availableHouses'
 // imported components
 import Header from './../header/Header'
 import BoxImage from './BoxImage'
@@ -28,7 +29,9 @@ export default class Home extends Component {
       ourProcess: 0,
       zipCode: "",
       noAgentFound: false,
-      loading: false
+      loading: false,
+      showAvailableHouses: false,
+      house: {}
     }
   }
   componentWillMount() {
@@ -40,6 +43,7 @@ export default class Home extends Component {
     window.scrollTo({ left, top});
   }
   render() {
+    //alert(this.state.showAvailableHouses)
 
     const listA = [
       "A ddddedicated, full service local licensed real estate agent",
@@ -83,7 +87,7 @@ export default class Home extends Component {
       </div>
     var id = (window.screen.width>637) ? 'boxImage' : 'boxImageB'
     console.log(id, window.screen.width)
-    return (
+    if (true)return (
       <div style={styles.container}>
         <div id={id}>
           <Header toggleLoading={this.toggleLoading.bind(this)} headerStyle={this.props.headerStyle} search={this.search.bind(this)} toggleLoginModal={this.toggleLoading.bind(this)}/>
@@ -91,7 +95,7 @@ export default class Home extends Component {
         <Container style={{zIndex: 2, paddingLeft: '2%', paddingTop: '2%',}}>
         <Row>
           <Col lg={12} xs={12}>
-            <SponsoredHouses sponsoredHouses={this.props.sponsoredHouses}/>
+            <SponsoredHouses {...this.props} sponsoredHouses={this.props.sponsoredHouses} showAvailableHouses={this.showAvailableHouses.bind(this)}/>
           </Col>
         </Row>
         <Row>
@@ -179,6 +183,8 @@ export default class Home extends Component {
         {this.state.loading && <LoadingScreen />}
       </div>
     )
+    // else
+    //   return <AvailableHouses showAvailableHouses={this.showAvailableHouses.bind(this)} house={this.state.house} sponsoredHouses={this.props.sponsoredHouses}/>
   }
   /*nextProcess() {
     var { ourProcess } = this.state.ourProcess
@@ -216,10 +222,15 @@ export default class Home extends Component {
   subscribeToNewsletter(email) {
     this.props.subscribeToNewsletter(email)
   }
+  showAvailableHouses(val, house) {
+    console.log(house, 'uuu')
+    this.setState({showAvailableHouses: val, house})
+  }
   search(location) {
     this.props.search(location)
   }
 }
+
 
 const manhattan = './../../images/manhattan.jpg'
 
@@ -323,3 +334,5 @@ const styles = {
   backgroundImage: {
   }
 }
+
+//export default withRouter(Home)

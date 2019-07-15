@@ -22,11 +22,13 @@ const MenuItem = ({house, selected}) => {
 
 // All items component
 // Important! add unique key
-export const Menu = (list, selected) =>
-  list.map(house => {
+export const Menu = (list, selected) =>{
+  console.log(list)
+
+  return list.map(house => {
     const {name} = house;
-    return <MenuItem house={house} key={name} selected={selected} />;
-  });
+    return <MenuItem house={house} key={JSON.stringify(house)} selected={selected} />;
+  })};
 
 
 const Arrow = ({ text, className }) => {
@@ -47,15 +49,28 @@ export default class SponsoredHouses extends Component {
     super(props);
     // call it again if items count changes
     this.state = {
-      selected: ''
+      selected: '',
+      house: {}
     };
   }
-  onSelect = key => {
-    this.setState({ selected: key });
+  onSelect = (house) => {
+    house = JSON.parse(house)
+    this.setState({ selected: house.name, house });
+    // var { selected } = this.state
+    // var house = {name: key}
+    const { history, sponsoredHouses, } = this.props
+    history.push({
+      pathname: '/search',
+      state: {
+        properties: sponsoredHouses,
+        house
+      }
+    })
+    //this.props.showAvailableHouses(true, house)
   }
   componentWillReceiveProps(props) {
     const { sponsoredHouses } = props
-    var selected = sponsoredHouses[0].name
+    var selected = Object.keys(this.state.house).length==0 ? sponsoredHouses[0].name : this.state.house.name
     this.setState({selected})
 
     console.log(sponsoredHouses, 99)
@@ -114,9 +129,9 @@ const styles = {
     borderWidth: 1,
     borderRadius: 50,
     padding: 5,
-    color: 'black',
+    color: 'white',
     fontWeight: 'bold',
-    backgroundColor: 'white'
+    backgroundColor: '#B22222'
   },
   controls:{
     position: 'absolute',

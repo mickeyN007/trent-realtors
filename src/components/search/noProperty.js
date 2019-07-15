@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import { Link } from "react-router-dom";
+import Header from './../header/HeaderC'
 
 import Map from './../map'
 import { Container, Row, Col, Dropdown,  } from 'react-bootstrap';
@@ -8,11 +9,15 @@ import { Container, Row, Col, Dropdown,  } from 'react-bootstrap';
 export default class NoProperty extends Component {
   render() {
     return (
+      <div>
+      <Header headerStyle={styles.headerStyle} />
       <div style={styles.container}>
         <Row>
+
+
         <Col xs={12} lg={6}>
           <center><h3><b>Sorry, we are not currently operating in your area:</b></h3></center>
-          <center><h1>{this.props.location}</h1></center>
+          <center><h1>h</h1></center>
 
           <center>
 
@@ -35,6 +40,7 @@ export default class NoProperty extends Component {
           <Map />
         </Col>
         </Row>
+      </div>
       </div>
     )
   }
@@ -77,5 +83,8 @@ const styles = {
     width: '60%',
     marginBottom: '3%',
     fontStyle: 'bold'
-  }
+  },
+  headerStyle: {
+
+  },
 }

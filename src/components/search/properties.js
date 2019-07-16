@@ -30,9 +30,9 @@ export default class Properties extends Component {
               <HouseImages house={this.props.house}/>
             </Col>
           </Row>
-          <Container style={{paddingRight: '10%', marginLeft: '10%', marginTop: '5%'}}>
+          <Container style={{paddingRight: '3%', marginLeft: '10%', marginTop: '5%'}}>
           <Row>
-            <Col lg={8} md={12}>
+            <Col lg={7} md={12} style={{marginRight: '5%'}}>
               <div style={{fontSize: 19}}><b>{this.props.house.name}</b></div>
               <div style={{fontSize: 14, marginBottom: '2%'}}>{this.props.house.name}</div>
 

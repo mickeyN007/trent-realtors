@@ -6,8 +6,8 @@ let aData = {
 
 export const mySettings = {
    //serverID: 'http://192.168.1.3:5000/',
-   //serverID: 'https://trent-realtors-server.herokuapp.com/',
-   serverID: 'http://192.168.1.5:5000/',
+   serverID: 'https://trent-realtors-server.herokuapp.com/',
+   //serverID: 'http://192.168.1.4:5000/',
    //serverID: 'http://192.168.8.104:5000/',
    //serverID: 'http://192.168.1.7:5000/',
    //serverID: 'https://bs-cmsserver.herokuapp.com/',

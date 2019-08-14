@@ -78,7 +78,7 @@ export default class AdminDashboard extends Component {
     const menu = [
       {
         name: 'Users',
-        image: require('./../../images/users.png')
+        image: require('./../../images/home.png')
       },
       {
         name: 'Houses',

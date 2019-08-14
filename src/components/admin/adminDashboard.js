@@ -22,6 +22,7 @@ import Appointments from './appointments'
 import Callbacks from './callbacks'
 import Subscribers from './subscribers'
 
+import usersImg from './../../images/home.png'
 
 export default class AdminDashboard extends Component {
   constructor() {
@@ -78,7 +79,7 @@ export default class AdminDashboard extends Component {
     const menu = [
       {
         name: 'Users',
-        image: require('./../../images/home.png')
+        image: usersImg
       },
       {
         name: 'Houses',

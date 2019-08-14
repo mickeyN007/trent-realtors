@@ -21,10 +21,10 @@ export default class Buy extends Component {
   }
   render() {
     return (
-      <div style={styles.container}>
+      <div style={styles.container} onClick={this.closeLoginModal()}>
       <BreakpointProvider>
         <div id='boxImageSell'>
-          <Header headerStyle={this.props.headerStyle} search={this.search.bind(this)} toggleLoading={this.toggleLoading.bind(this)}/>
+          <Header closeLoginModal={this.closeLoginModal.bind(this)} headerStyle={this.props.headerStyle} search={this.search.bind(this)} toggleLoading={this.toggleLoading.bind(this)}/>
           <Breakpoint medium down>
           <center><div style={{backgroundColor: 'black', position: 'absolute', top: 440, marginLeft: 100, padding: '2%'}}>
             <h4>FIND YOUR DREAM HOME</h4>
@@ -75,6 +75,9 @@ export default class Buy extends Component {
   toggleLoading(loading) {
     this.setState({loading})
   }
+    closeLoginModal() {
+
+    }
 }
 
 const styles = {

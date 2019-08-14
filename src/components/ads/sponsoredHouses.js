@@ -84,7 +84,8 @@ export default class SponsoredHouses extends Component {
     if (this.props.sponsoredHouses.length > 0)
     return (
       <div style={styles.container}>
-        <center><h4>Sponsored Houses</h4></center>
+        <center><h2>Sponsored Houses</h2></center>
+        <br />
         <ScrollMenu
          data={menu}
          arrowLeft={ArrowLeft}

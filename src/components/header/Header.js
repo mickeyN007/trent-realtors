@@ -27,8 +27,10 @@ export default class Header extends Component {
     }
   }
   render() {
-    let colorStyle =  {color: "black", listStyleType: 'none'}
-    let loginPadding = (Object.keys(this.props.headerStyle).length != 0) ? {marginTop: '10%'} : {marginTop: '1%'}
+    let colorStyle =  {color: 'white', listStyleType: 'none'}
+    let colorStyleB =  {color: 'black', listStyleType: 'none'}
+
+    let loginPadding = (Object.keys(this.props.headerStyle).length != 0) ? {marginTop: '7%'} : {marginTop: '1%'}
 
     let imagePadding = (Object.keys(this.props.headerStyle).length != 0) ? {marginTop: '-5%'} : {}
     let contactStyle = (Object.keys(this.props.headerStyle).length != 0) ? {textDecoration: 'none', color: 'black', fontColor: 'black', fontWeight: 'bold', fontSize: '14px'} : {textDecoration: 'none', fontColor: 'white', fontSize: '14px', fontWeight: 'bold', color: 'white'}
@@ -39,7 +41,7 @@ export default class Header extends Component {
       <BreakpointProvider>
       <div style={styles.container}>
       <Breakpoint medium down>
-        <Row style={{marginBottom: '1000%', zIndex: 999999999999, padding: '4%', paddingBottom:'10%', height: '10%', backgroundColor: 'white', borderBottomStyle: 'solid', borderBottomColor: '#B22222', position:'fixed', }}>
+        <Row style={styles.p}>
           <Col xs={10}>
             <Link to='/' ><img src={logo} width="30%" height="100%" /></Link>
           </Col>
@@ -50,37 +52,37 @@ export default class Header extends Component {
             <span onClick={this.toggleShowMobileMenu.bind(this)}><img src={close}  width="80%" height="60%"/></span>
           </Col>}
         </Row>
-        {this.state.showMobileMenu && <Row style={{zIndex: 999999999999, width: '100%', height: '100%', opacity: '1', position: 'fixed', marginTop: '15%', backgroundColor: '#bc222222'}}>
-          <Col xs={12} style={{width: '1%', padding: '3%'}}>
+        {this.state.showMobileMenu && <Row style={styles.q}>
+          <Col xs={12} style={{width: '1%', color: 'white'}}>
           <Link style={colorStyle} to="/buy/">Buy a Home</Link>
           </Col>
-          <Col xs={12} style={{width: '100%', padding: '3%'}}>
+          <Col xs={12} style={{width: '100%', color: 'white'}}>
           <Link  style={colorStyle} to="/sell/">Sell Your Home</Link>
           </Col>
-          <Col xs={12} style={{width: '100%', padding: '3%'}}>
+          <Col xs={12} style={{width: '100%', color: 'white'}}>
           <Link style={colorStyle} to="/#ourAgents/">Meet Your Agent</Link>
           </Col>
         </Row>}
       </Breakpoint>
         <Breakpoint large up>
         <nav>
-          <Row style={{...{padding: '2%', zIndex: 9999999999999999}, ...this.props.headerStyle}}>
+          <Row style={{...{padding: '1%', zIndex: 9999999999999999}, ...this.props.headerStyle}}>
             <Col lg={3}>
               <Link to="/">
                 <img src={logo} width="50%" height="100%" style={imagePadding}/>
               </Link>
             </Col>
             <Col lg={2}>
-              <Link style={colorStyle} to="/buy/">Buy a Home</Link>
+              <Link style={colorStyleB} to="/buy/">Buy a Home</Link>
             </Col>
             <Col lg={2}>
-                <Link style={colorStyle} to="/sell/">Sell Your Home</Link>
+                <Link style={colorStyleB} to="/sell/">Sell Your Home</Link>
             </Col>
             <Col lg={2}>
-                <Link style={colorStyle} to={`/#ourAgents`}>Meet Your Agent</Link>
+                <Link style={colorStyleB} to={`/#ourAgents`}>Meet Your Agent</Link>
             </Col>
             <Col lg={3} style={{cursor: 'pointer'}}>
-                <span onClick={this.toggleLoginModal.bind(this)} style={{marginLeft: '10%'}}><img src={account} width="10%" height="50%" /><span style={{...colorStyle, ...{marginTop: '50%'}}}>Sign In</span></span>
+                <span onClick={this.toggleLoginModal.bind(this)} style={{marginLeft: '10%'}}><img src={account} width="10%" height="50%" /><span style={{...colorStyleB, ...{marginTop: '50%'}}}>Sign In</span></span>
             </Col>
           </Row>
           </nav>
@@ -143,4 +145,6 @@ const styles = {
     background: 'url(./../../images/search.png) no-repeat scroll 557px 7px',
     paddingLeft:'30px'
   },
+  p: {marginBottom: '1000%', zIndex: 999999999999, padding: '4%', paddingBottom:'10%', height: '10%', backgroundColor: 'white', borderBottomStyle: 'solid', borderBottomColor: '#B22222', position:'fixed', },
+  q: {padding: '3%', zIndex: 999999999999, width: '100%', height: '100%', opacity: '1', position: 'fixed', color: 'white', marginTop: '17.5%', backgroundColor: '#5E1914'}
 }

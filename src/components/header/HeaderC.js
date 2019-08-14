@@ -43,21 +43,21 @@ export default class Header extends Component {
             <span onClick={this.toggleShowMobileMenu.bind(this)}><img src={close}  width="80%" height="60%"/></span>
           </Col>}
           </Row>
-          {this.state.showMobileMenu && <Row style={{zIndex: 999999999999, width: '100%', height: '100%', opacity: '1', position: 'fixed', marginTop: '15%', backgroundColor: '#bc222222'}}>
-            <Col xs={12} style={{width: '1%', padding: '3%'}}>
+          {this.state.showMobileMenu && <Row style={{zIndex: 999999999999, width: '100%', height: '100%', opacity: '1', position: 'fixed', marginTop: '17.5%', backgroundColor: '#5E1914', padding: '3%'}}>
+            <Col xs={12}>
             <Link style={colorStyle} to="/buy/">BUY</Link>
             </Col>
-            <Col xs={12} style={{width: '100%', padding: '3%'}}>
+            <Col xs={12}>
             <Link style={colorStyle} to="/sell/">SELL</Link>
             </Col>
-            <Col xs={12} style={{width: '100%', padding: '3%'}}>
+            <Col xs={12}>
             <Link style={colorStyle} to="/valuation">LISTING APPOINTMENT</Link>
             </Col>
-            <Col xs={12} style={{width: '100%', padding: '3%'}}>
+            <Col xs={12}>
             <Link style={colorStyle} to="/valuation">TOUR LISTS</Link>
             </Col>
-            <Col xs={12} style={{width: '100%', padding: '3%'}}>
-            <span id='pointer' style={colorStyle}>ACCOUNT</span>
+            <Col xs={12}>
+            <Link id='pointer' to="/account" style={colorStyle}>ACCOUNT</Link>
             </Col>
           </Row>}
         </Breakpoint>
@@ -99,7 +99,6 @@ export default class Header extends Component {
     )
   }
   toggleLoading(loading) {
-    alert(88888)
     this.props.toggleLoading(loading)
   }
   toggleShowMobileMenu() {
@@ -120,6 +119,7 @@ const styles = {
   container: {
     zIndex: 9999999999999999,
     backgroundColor: '#B22222',
+    width: '100%',
     marginBottom: '7%',
     position: 'fixed',
   },

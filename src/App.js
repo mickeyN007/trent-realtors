@@ -16,8 +16,8 @@ import Valuation from './components/valuation/valuation'
 import Search from './components/search/search'
 import LoginRegister from './components/loginRegister/loginRegister'
 import Account from './components/account/account'
-// import Admin from "layouts/Admin.jsx";
-
+import Admin from "./components/admin/admin";
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import { createBrowserHistory } from "history";
 
 const hist = createBrowserHistory();
@@ -126,7 +126,12 @@ export default class App extends Component {
               />
             }
           />
-
+          <Route
+            path="/admin"
+            render={(props) =>
+              <Admin {...props}/>
+            }
+          />
         </div>
       </Router>
     );
@@ -162,6 +167,7 @@ export default class App extends Component {
     .then(data => {
       const { properties } = data
       this.setState({properties})
+      alert('fff')
       hist.push({
         pathname: '/search',
         state: {
@@ -210,17 +216,21 @@ export default class App extends Component {
       paddingBottom: '0',
       margin: 0,
       borderColor: "#B22222",
-      borderBottomStyle: "solid"
+      borderBottomStyle: "solid",
+      width: '100%'
     }
     let headerStyleB = {
-      backgroundColor: "#B22222",
-      color: "white",
+      backgroundColor: "white",
+      color: "black",
       fontWeight: "bold",
       position: 'fixed',
       height: "100px",
       paddingTop: '2%',
       paddingBottom: '0',
       margin: 0,
+      width: '100%',
+      borderColor: '#B22222',
+      borderBottomStyle: 'solid'
     }
     if ( window.scrollY <= 10 ) {
       //if (!headerStyleSet)

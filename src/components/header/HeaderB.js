@@ -21,16 +21,16 @@ export default class Header extends Component {
     }
   }
   render() {
-    let colorStyle = {color: "white", fontSize: 14}
+    let colorStyle = (Object.keys(this.props.headerStyle).length != 0) ? {color: 'black'} : {color: "white"}
     let imagePadding = (Object.keys(this.props.headerStyle).length != 0) ? {marginTop: '-5%'} : {}
     let loginPadding = (Object.keys(this.props.headerStyle).length != 0) ? {marginTop: '10%'} : {marginTop: '1%'}
-
+    let mColorStyle = {color: 'white', cursor: 'pointer'}
     //(Object.keys(this.props.headerStyle).length != 0) ? {color: "black"} : {color: "white"}
     return (
       <BreakpointProvider>
       <div style={styles.container}>
       <Breakpoint medium down>
-        <Row style={{zIndex: 999999999999, padding: '4%', paddingBottom:'10%', height: '10%', backgroundColor: 'white', borderBottomStyle: 'solid', borderBottomColor: '#B22222', position:'fixed', }}>
+        <Row style={styles.semiContainer}>
           <Col xs={10}>
             <Link to="/">
               <img src={logo} width="30%" height="100%"/>
@@ -43,21 +43,21 @@ export default class Header extends Component {
             <span onClick={this.toggleShowMobileMenu.bind(this)}><img src={close}  width="80%" height="60%"/></span>
           </Col>}
           </Row>
-          {this.state.showMobileMenu && <Row style={{zIndex: 999999999999, width: '100%', height: '100%', opacity: '1', position: 'fixed', marginTop: '15%', backgroundColor: '#bc222222'}}>
-            <Col xs={12} style={{width: '1%', padding: '3%'}}>
-            <Link style={colorStyle} to="/buy/">BUY</Link>
+          {this.state.showMobileMenu && <Row style={{padding: '3%', zIndex: 999999999999, width: '100%', height: '100%', opacity: '1', position: 'fixed', marginTop: '17.5%', backgroundColor: '#5E1914'}}>
+            <Col xs={12} style={{width: '1%', padding: '3%', cursor: 'pointer'}}>
+            <Link style={mColorStyle} to="/buy/">BUY</Link>
             </Col>
-            <Col xs={12} style={{width: '100%', padding: '3%'}}>
-            <Link style={colorStyle} to="/sell/">SELL</Link>
+            <Col xs={12} style={{width: '100%', padding: '3%', cursor: 'pointer'}}>
+            <Link style={mColorStyle} to="/sell/">SELL</Link>
             </Col>
-            <Col xs={12} style={{width: '100%', padding: '3%'}}>
-            <Link style={colorStyle} to="/valuation">LISTING APPOINTMENT</Link>
+            <Col xs={12} style={{width: '100%', padding: '3%', cursor: 'pointer'}}>
+            <Link style={mColorStyle} to="/valuation">LISTING APPOINTMENT</Link>
             </Col>
-            <Col xs={12} style={{width: '100%', padding: '3%'}}>
-            <Link style={colorStyle} to="/valuation">TOUR LISTS</Link>
+            <Col xs={12} style={{width: '100%', padding: '3%', cursor: 'pointer'}}>
+            <Link style={mColorStyle} to="/valuation">TOUR LISTS</Link>
             </Col>
-            <Col xs={12} style={{width: '100%', padding: '3%'}}>
-            <span style={colorStyle}>ACCOUNT</span>
+            <Col xs={12} style={{width: '100%', padding: '3%', cursor: 'pointer'}}>
+            <Link to="/account" style={mColorStyle}>ACCOUNT</Link>
             </Col>
           </Row>}
         </Breakpoint>
@@ -102,7 +102,6 @@ export default class Header extends Component {
     this.setState({showMobileMenu: !showMobileMenu})
   }
   toggleLoading(loading) {
-    alert(88888)
     this.props.toggleLoading(loading)
   }
   toggleLoginModal() {
@@ -113,6 +112,9 @@ export default class Header extends Component {
       this.setState({showLoginModal: true})
     }
   }
+  closeLoginModal() {
+    this.setState({showLoginModal: false})
+  }
 }
 
 const styles = {
@@ -121,5 +123,6 @@ const styles = {
   },
   inputPS: {
     padding: "0.5%"
-  }
+  },
+  semiContainer: {zIndex: 999999999999, padding: '4%', paddingBottom:'10%', height: '10%', backgroundColor: 'white', borderBottomStyle: 'solid', borderBottomColor: '#B22222', position:'fixed', }
 }

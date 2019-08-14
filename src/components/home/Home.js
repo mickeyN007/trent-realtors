@@ -86,7 +86,6 @@ export default class Home extends Component {
         <p>If you'd like to try a new search, please enter a new zip code.</p>
       </div>
     var id = (window.screen.width>637) ? 'boxImage' : 'boxImageB'
-    console.log(id, window.screen.width)
     if (true)return (
       <div style={styles.container}>
         <div id={id}>
@@ -262,7 +261,11 @@ const styles = {
     paddingBottom: "5%"
   },
   whatsIncludedSub: {
-    padding: "1.5%"
+    //height: '30%',
+    padding: '2%',
+    //paddingTop: '2%',
+    //backgroundColor: 'white',
+    marginBottom: '5%'
   },
   start: {
     float: "left",
@@ -329,7 +332,9 @@ const styles = {
     textDecoration: "none",
     padding: "2%",
     color: "white",
-    fontWeight: "bold"
+    fontWeight: "bold",
+    padding: '5%',
+    marginBottom: '4%'
   },
   backgroundImage: {
   }

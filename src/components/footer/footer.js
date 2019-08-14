@@ -61,7 +61,7 @@ export default class Footer extends Component {
             style={styles.txtInput}
             placeholder="Enter your email address"
           />
-          <span onClick={this.subscribeToNewsletter.bind(this)} style={{cursor: 'pointer', padding: "2.8%", backgroundColor: "red"}}><img src={rightArrowB} width="4%" /></span>
+          <span onClick={this.subscribeToNewsletter.bind(this)} style={{cursor: 'pointer', padding: "3%", backgroundColor: "red"}}><img src={rightArrowB} width="4%" /></span>
         </Col>
           <Col lg={6}>
           <h4><b>Follow us</b></h4>
@@ -181,6 +181,7 @@ const styles = {
     width: "60%",
     padding: "2%",
     color: "black",
+    borderColor: '#007BFF'
   },
   menu: {
     paddingLeft: '10%',

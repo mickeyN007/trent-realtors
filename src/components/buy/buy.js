@@ -26,7 +26,7 @@ export default class Buy extends Component {
         <div id='boxImageSell'>
           <Header closeLoginModal={this.closeLoginModal.bind(this)} headerStyle={this.props.headerStyle} search={this.search.bind(this)} toggleLoading={this.toggleLoading.bind(this)}/>
           <Breakpoint medium down>
-          <center><div style={{backgroundColor: 'black', position: 'absolute', top: 440, marginLeft: 100, padding: '2%'}}>
+          <center><div style={{backgroundColor: 'black', position: 'absolute', top: '73%', marginLeft: '20%', padding: '2%'}}>
             <h4>FIND YOUR DREAM HOME</h4>
             <div>
               <center><input style={styles.in} placeholder="ENTER ZIP CODE, ADDRESS OR CITY" onChange={(e) => this.setState({location: e.target.value})}/>
@@ -35,7 +35,7 @@ export default class Buy extends Component {
           </div></center>
           </Breakpoint>
           <Breakpoint large up>
-          <center><div style={{width: '40%', backgroundColor: 'black', position: 'absolute', top: 490, marginLeft: 430, padding: '2%'}}>
+          <center><div style={{width: '40%', backgroundColor: 'black', position: 'absolute', top: '72%', marginLeft: '30%', padding: '2%'}}>
             <h4>FIND YOUR DREAM HOME</h4>
             <div>
               <center><input style={styles.in} placeholder="ENTER ZIP CODE, ADDRESS OR CITY" onChange={(e) => this.setState({location: e.target.value})}/>
@@ -97,6 +97,7 @@ const styles = {
   },
   search: {
     backgroundColor: "#0080FF",
-    padding: "2%"
+    padding: "3.5%",
+    cursor: 'pointer'
   }
 }

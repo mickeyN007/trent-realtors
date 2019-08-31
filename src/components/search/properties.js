@@ -5,7 +5,7 @@ import './../../css/availableHouses.css'
 import 'bootstrap/dist/css/bootstrap.css';
 import { Container, Row, Col, Dropdown,  } from 'react-bootstrap';
 import { Link } from "react-router-dom"
-import Header from './../header/HeaderC'
+import Header from './../header/Header'
 import Footer from './../footer/footer'
 import HouseImages from './houseImages'
 import SponsoredHouses from './../ads/sponsoredHouses'
@@ -24,10 +24,10 @@ export default class Properties extends Component {
     return (
         <BreakpointProvider>
         <Breakpoint large up>
-                  <div style={{display: 'flex', flex: 1,}}>
+                  <div>
             <Header headerStyle={styles.headerStyle} toggleLoading={this.toggleLoading.bind(this)} />
             <Container fluid style={styles.container}>
-          <Row>
+          <Row style={{paddingTop: 120}}>
             <Col lg={12}>
               <HouseImages house={this.props.house}/>
             </Col>
@@ -140,13 +140,22 @@ export default class Properties extends Component {
 }
 
 const styles = {
-  container: {
-    paddingTop: '7.5%'
-  },
   containerB: {
     paddingTop: '20.5%'
   },
-
   headerStyle: {
+            zIndex: 9999999999999,
+       backgroundColor: "white",
+      color: "black",
+      fontWeight: "bold",
+      position: 'fixed',
+      height: "100px",
+      paddingTop: '2%',
+      paddingBottom: '0',
+      paddingLeft: '10%',
+      margin: 0,
+      borderColor: "#B22222",
+      borderBottomStyle: "solid",
+      width: '100%',
   },
 }

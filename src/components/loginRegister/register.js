@@ -30,7 +30,7 @@ export default class Register extends Component {
             </span></Col>
           </Row>
         </div>
-        {this.state.who && <RegisterForm toggleView={this.toggleView.bind(this)} who={this.state.who}/>}
+        {this.state.who && <RegisterForm toggleLoading={this.props.toggleLoading.bind(this)} toggleView={this.toggleView.bind(this)} who={this.state.who}/>}
       </div>
     )
   }

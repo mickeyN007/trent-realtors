@@ -97,7 +97,7 @@ export default class Home extends Component {
             <SponsoredHouses {...this.props} sponsoredHouses={this.props.sponsoredHouses} showAvailableHouses={this.showAvailableHouses.bind(this)}/>
           </Col>
         </Row>
-        <Row>
+        <Row style={{paddingTop: '5%'}}>
           <Col lg={6}>
             <p><h2>Our agents have joined us from leading brokerages</h2></p>
 
@@ -137,10 +137,9 @@ export default class Home extends Component {
             <div style={styles.whatsIncludedSub}>Access to extensive local network of motivated buyers looking to purchase with Trent Realtors</div>
             <div style={styles.whatsIncludedSub}>Receive status updates and see offers and buyer feedback instantly</div>
             <div style={styles.whatsIncludedSub}>Your property will be listed on trentrealtors.com which has a huge customer base</div>
-            <div style={styles.whatsIncludedSub}></div>
           </div>
           </Row>
-          <Row>
+          <Row style={{marginTop: '15%'}}>
           <Col lg={4}>
           <div style={{clear: "both"}}><br /><br /><br /><center><Link style={styles.getStarted} to="/valuation/">BOOK A FREE CONSULTATION</Link></center></div>
           </Col>
@@ -172,7 +171,7 @@ export default class Home extends Component {
             </div>
           </Col>
           <Col lg={6}>
-          <div style={{paddingTop: "2%", width:"90%", height:"60%", float: "left", width: "30%", paddingLeft: "5%",}}>
+          <div style={{paddingTop: "25%", width:"90%", height:"60%", float: "left", width: "30%", paddingLeft: "5%",}}>
             <img src={blackHouse4} width="400vh" height="400px" />
           </div>
           </Col>
@@ -261,18 +260,18 @@ const styles = {
     paddingBottom: "5%"
   },
   whatsIncludedSub: {
-    //height: '30%',
-    padding: '2%',
-    //paddingTop: '2%',
-    //backgroundColor: 'white',
+    height: '30%',
+    padding: '10% 5% 0 5%',
+    backgroundColor: 'white',
     marginBottom: '5%'
   },
   start: {
     float: "left",
     width: "40%",
+    height: 180,
     borderStyle: "solid",
     borderWidth: "thin",
-    padding: "2%",
+    padding: "4%",
     marginRight: "3.5%",
     marginLeft: "3.5%",
     marginBottom: "5%",
@@ -283,10 +282,11 @@ const styles = {
     width: "45%",
     fontSize: "20px",
     lineHeight: "1.5",
-    float: "left"
+    float: "left",
+    paddingRight: '2.5%'
   },
   whatsIncludedRight: {
-    paddingLeft: "5%",
+    paddingLeft: "2.5%",
     width: "45%",
     fontSize: "20px",
     lineHeight: "1.5",

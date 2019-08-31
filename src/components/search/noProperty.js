@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import { Link } from "react-router-dom";
-import Header from './../header/HeaderC'
+import Header from './../header/HeaderB'
 
 import Map from './../map'
 import { Container, Row, Col, Dropdown,  } from 'react-bootstrap';

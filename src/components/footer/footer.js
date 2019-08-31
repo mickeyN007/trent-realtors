@@ -61,7 +61,7 @@ export default class Footer extends Component {
             style={styles.txtInput}
             placeholder="Enter your email address"
           />
-          <span onClick={this.subscribeToNewsletter.bind(this)} style={{cursor: 'pointer', padding: "3%", backgroundColor: "red"}}><img src={rightArrowB} width="4%" /></span>
+          <span onClick={this.subscribeToNewsletter.bind(this)} style={{cursor: 'pointer', padding: "3%", backgroundColor: "#b22222"}}><img src={rightArrowB} width="4%" /></span>
         </Col>
           <Col lg={6}>
           <h4><b>Follow us</b></h4>
@@ -69,13 +69,13 @@ export default class Footer extends Component {
 
         <div style={{clear: "right", marginTop: "8%"}}>
           <span style={{paddingRight: "2%"}}>
-            <img src="https://pbonlineassets.azureedge.net/web-images/marketing-websiteui-us/svg/facebook-color.svg" alt="Icon" />
+            <a href="fb.me/trentrealtors" target="_blank"><img src="https://pbonlineassets.azureedge.net/web-images/marketing-websiteui-us/svg/facebook-color.svg" alt="Icon" /></a>
           </span>
           <span style={{paddingRight: "2%"}}>
             <img src="https://pbonlineassets.azureedge.net/web-images/marketing-websiteui-us/svg/twitter-color.svg" alt="Icon" />
           </span>
           <span style={{paddingRight: "2%"}}>
-            <a href="https://www.youtube.com/channel/UCFyhYGYntZvBRTLckDaJIhA/" target="_blank" rel="noopener"><img src="https://pbonlineassets.azureedge.net/web-images/marketing-websiteui-us/svg/youtube-color.svg" alt="Icon"/></a>
+            <img src="https://pbonlineassets.azureedge.net/web-images/marketing-websiteui-us/svg/youtube-color.svg" alt="Icon"/>
           </span>
           <span style={{paddingRight: "2%"}}>
             <img src="https://pbonlineassets.azureedge.net/web-images/marketing-websiteui-us/svg/instagram-color.svg" alt="Icon" />
@@ -93,8 +93,7 @@ export default class Footer extends Component {
             <h6 style={styles.color}>TRENT REALTORS</h6>
 
             <Link style={styles.colorStyle} to="/buy/">Join the Team</Link>
-            <Link style={styles.colorStyle} to="/buy/">About Us</Link>
-            <Link style={styles.colorStyle} to="//#ourAgents">Our Agents</Link>
+            <Link style={styles.colorStyle} to="/#ourAgents">Our Agents</Link>
           </Col>
           <Col lg={2} xs={6}>
             <h6 style={styles.color}>BUYING / SELLING</h6>
@@ -117,9 +116,9 @@ export default class Footer extends Component {
         <Col lg={3} xs={6} style={{marginTop: '1.5%'}}>
           <h6 style={styles.color}></h6>
               <div style={styles.font}><b>Branch Office: </b>Standard Plaza Plot 2302 Herbert Macaulay Way Opposite Sky Memorial Complex, Wuse, Zone 6, Abuja.</div><br />
-              <div style={styles.font}>+2348098410475</div>
-              <div style={styles.font}>+2348037410475</div>
-              <div style={styles.font}>enquiries@trentrealtors.com</div>
+              <div style={styles.font}><a href="tel:+2348098410475">+2348098410475</a></div>
+              <div style={styles.font}><a href="tel:+2348037410475">+2348037410475</a></div>
+              <div style={styles.font}><a href="mailto:enquiries@trentrealtors.com" target="_top">enquiries@trentrealtors.com</a></div>
       </Col>
         </Row>
         <Row>

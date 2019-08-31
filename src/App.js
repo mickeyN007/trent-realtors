@@ -27,11 +27,36 @@ export default class App extends Component {
     super()
     this.state = {
       headerStyle: {
-        zIndex: 9999999999999,
+      zIndex: 9999999999999,
+      backgroundColor: "white",
+      color: "black",
+      fontWeight: "bold",
+      position: 'fixed',
+      height: "100px",
+      paddingTop: '2%',
+      paddingBottom: '0',
+      paddingLeft: '10%',
+      margin: 0,
+      borderColor: "#B22222",
+      borderBottomStyle: "solid",
+      width: '100%'
+
       },
       headerStyleB: {
         zIndex: 9999999999999,
-      },
+       backgroundColor: "white",
+      color: "black",
+      fontWeight: "bold",
+      position: 'fixed',
+      height: "100px",
+      paddingTop: '2%',
+      paddingBottom: '0',
+      paddingLeft: '10%',
+      margin: 0,
+      borderColor: "#B22222",
+      borderBottomStyle: "solid",
+      width: '100%'
+     },
       headerStyleSet: false,
       searchForHomes: false,
       properties: [],
@@ -47,7 +72,7 @@ export default class App extends Component {
   }
   render() {
     return (
-      <Router history={hist}>
+      <Router history={hist} forceRefresh={true}>
         <div>
           <Route
             exact={true}
@@ -159,6 +184,7 @@ export default class App extends Component {
   }
   search(location) {
     //this.setState({})
+    alert(location)
     this.setState({location})
     fetch(mySettings.serverID+'/api/search',
       mySettings.optionsB
@@ -179,6 +205,7 @@ export default class App extends Component {
       //return {data, error: "Success"}
     })
     .catch(err => {
+      alert('gg')
       hist.push({
         pathname: '/search',
         state: {
@@ -215,6 +242,7 @@ export default class App extends Component {
       paddingTop: '2%',
       paddingBottom: '0',
       margin: 0,
+      paddingLeft: '10%',
       borderColor: "#B22222",
       borderBottomStyle: "solid",
       width: '100%'
@@ -228,16 +256,17 @@ export default class App extends Component {
       paddingTop: '2%',
       paddingBottom: '0',
       margin: 0,
+      paddingLeft: '10%',
       width: '100%',
       borderColor: '#B22222',
       borderBottomStyle: 'solid'
     }
     if ( window.scrollY <= 10 ) {
       //if (!headerStyleSet)
-        this.setState({
+        /*this.setState({
           headerStyle: {},
           headerStyleB: {}
-        })
+        })*/
     } else {
       // ( window.scrollY <= 40 && window.scrollY > 10) {
       this.setState({headerStyle,headerStyleB})

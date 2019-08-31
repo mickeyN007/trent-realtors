@@ -72,7 +72,7 @@ export default class RegisterForm extends Component {
     this.setState({titleDrpDwnStatus: !this.state.titleDrpDwnStatus})
   }
   toggleLoading(loading) {
-    this.setState({loading})
+    this.props.toggleLoading(loading)
   }
   selectTitle(title) {
     this.setState({title, titleDrpDwnStatus: false})

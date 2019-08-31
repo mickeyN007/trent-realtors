@@ -38,7 +38,7 @@ import logo from './../../images/logo.PNG'
 const mobileMenuId = 'primary-search-account-menu-mobile';
 const menuId = 'primary-search-account-menu';
 
-const styles = {
+const classes = {
   grow: {
     flexGrow: 1,
   },
@@ -99,11 +99,9 @@ const styles = {
   },
   paper: {
     //width: drawerWidth,,
-    //background: '#B22222'
+    background: '#B22222'
   },
-  colorA: {
-    color: 'white'
-  }
+
 }
 
 class CustomDrawer extends Component {
@@ -113,8 +111,8 @@ class CustomDrawer extends Component {
       open: true
     }
   }
-  /*componentDidMount() {
-    window.addEveatListener("resize", this.resize.bind(this));
+  componentDidMount() {
+    window.addEventListener("resize", this.resize.bind(this));
     this.resize();
   }
   resize() {
@@ -123,10 +121,8 @@ class CustomDrawer extends Component {
   componentWillUnmount() {
     window.removeEventListener("resize", this.resize.bind(this))
   }
-  */
   render() {
     //alert(window.innerWidth && this.state.open)
-    const { classes } = this.props;
     var variant = (this.state.open) ? 'permanent' : 'temporary'
     return (
       <div>
@@ -189,7 +185,7 @@ class CustomDrawer extends Component {
         <List>
           {['Dashboard', 'Users', 'Houses', 'Listing Appointments', 'Callbacks', 'Subscribers'].map((text, index) => (
             <ListItem button key={text} onClick={this.selectMenu.bind(this, text)}>
-              <ListItemIcon classes={classes.colorA}>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
@@ -261,6 +257,24 @@ class CustomDrawer extends Component {
     this.setState({open: false})
     this.props.changeMenu(menu)
   }
+}
+const drawerWidth = 0;
+const styles = {
+  drawer: {
+    width: '400vh',
+    //width: drawerWidth,
+    //flexShrink: 0,
+    backgroundColor: 'red'
+  },
+  drawerHeader: {
+    //display: 'flex',
+    //alignItems: 'center',
+    //padding: '0 8px',
+    //...theme.mixins.toolbar,
+    //justifyContent: 'flex-end',
+    //backgroundColor: 'red'
+  },
+  //toolbar: //theme.mixins.toolbar,
 }
 
 export default withStyles(styles)(CustomDrawer)

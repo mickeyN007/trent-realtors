@@ -21,10 +21,24 @@ export default class Header extends Component {
     }
   }
   render() {
-    let colorStyle = (Object.keys(this.props.headerStyle).length != 0) ? {color: 'black'} : {color: "white"}
-    let imagePadding = (Object.keys(this.props.headerStyle).length != 0) ? {marginTop: '-5%'} : {}
-    let loginPadding = (Object.keys(this.props.headerStyle).length != 0) ? {marginTop: 110} : {marginTop: '1%'}
-    let mColorStyle = {color: 'white', cursor: 'pointer'}
+    let headerStyle = {
+      zIndex: 9999999999999999999,
+      backgroundColor: 'white',
+      color: 'black',
+      fontWeight: 'bold',
+      position: 'fixed',
+      height: '100px',
+      paddingTop: '2%',
+      paddingBottom: '0',
+      margin: 0,
+      borderColor: '#B22222',
+      borderBottomStyle: 'solid',
+      width: '100%'
+    }
+    let colorStyle = (Object.keys(this.props.headerStyle).length != 0) ? {color: 'white'} : {color: "black"}
+    let imagePadding = (Object.keys(this.props.headerStyle).length != 0) ? {marginTop: '-90%'} : {}
+    let loginPadding = (Object.keys(this.props.headerStyle).length != 0) ? {marginTop: '10%'} : {marginTop: '1%'}
+    let mColorStyle = (Object.keys(this.props.headerStyle).length != 0) ? {color: 'black', cursor: 'pointer'} : {color: 'white', cursor: 'pointer'}
     //(Object.keys(this.props.headerStyle).length != 0) ? {color: "black"} : {color: "white"}
     return (
       <BreakpointProvider>
@@ -44,29 +58,29 @@ export default class Header extends Component {
           </Col>}
           </Row>
           {this.state.showMobileMenu && <Row style={{padding: '3%', zIndex: 999999999999, width: '100%', height: '100%', opacity: '1', position: 'fixed', marginTop: '17.5%', backgroundColor: '#5E1914'}}>
-            <Col xs={12} style={{height: 10, width: '1%', padding: '3%', cursor: 'pointer'}}>
+            <Col xs={12} style={{width: '1%', padding: '3%', cursor: 'pointer'}}>
             <Link style={mColorStyle} to="/buy/">BUY</Link>
             </Col>
-            <Col xs={12} style={{height: 10, width: '100%', padding: '3%', cursor: 'pointer'}}>
+            <Col xs={12} style={{width: '100%', padding: '3%', cursor: 'pointer'}}>
             <Link style={mColorStyle} to="/sell/">SELL</Link>
             </Col>
-            <Col xs={12} style={{height: '10%', width: '100%', padding: '3%', cursor: 'pointer'}}>
+            <Col xs={12} style={{width: '100%', padding: '3%', cursor: 'pointer'}}>
             <Link style={mColorStyle} to="/valuation">LISTING APPOINTMENT</Link>
             </Col>
-            <Col xs={12} style={{height: '10%', width: '100%', padding: '3%', cursor: 'pointer'}}>
+            <Col xs={12} style={{width: '100%', padding: '3%', cursor: 'pointer'}}>
             <Link style={mColorStyle} to="/valuation">TOUR LISTS</Link>
             </Col>
-            <Col xs={12} style={{height: '10%', width: '100%', padding: '3%', cursor: 'pointer'}}>
+            <Col xs={12} style={{width: '100%', padding: '3%', cursor: 'pointer'}}>
             <Link to="/account" style={mColorStyle}>ACCOUNT</Link>
             </Col>
           </Row>}
         </Breakpoint>
         <Breakpoint large up>
         <nav>
-          <Row style={{...{padding: '1.5%', zIndex: 9999999999999999}, ...this.props.headerStyle}}>
+          <Row style={{...{padding: '1.5%', zIndex: 9999999999999999}, ...headerStyle}}>
             <Col lg={3}>
               <Link to="/">
-                <img src={logo} width="50%" height="100%" style={imagePadding}/>
+                <img src={logo} width="40%" height="100%" style={imagePadding}/>
               </Link>
             </Col>
             <Col lg={1}>
@@ -119,10 +133,10 @@ export default class Header extends Component {
 
 const styles = {
   container: {
-    minHeight: '80vh',
+    minHeight: '12vh',
   },
   inputPS: {
     padding: "0.5%"
   },
-  semiContainer: {zIndex: 999999999999, padding: '4%', paddingBottom:'10%', height: '10%', backgroundColor: 'white', borderBottomStyle: 'solid', borderBottomColor: '#B22222', position:'fixed', paddingLeft: '10%'}
+  semiContainer: {zIndex: 999999999999, padding: '4%', paddingBottom:'10%', height: '10%', backgroundColor: 'white', borderBottomStyle: 'solid', borderBottomColor: '#B22222', position:'fixed', }
 }

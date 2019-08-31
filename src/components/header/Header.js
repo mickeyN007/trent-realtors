@@ -30,7 +30,7 @@ export default class Header extends Component {
     let colorStyle =  {color: 'white', listStyleType: 'none'}
     let colorStyleB =  {color: 'black', listStyleType: 'none'}
 
-    let loginPadding = (Object.keys(this.props.headerStyle).length != 0) ? {marginTop: '7%'} : {marginTop: '1%'}
+    let loginPadding = (Object.keys(this.props.headerStyle).length != 0) ? {marginTop: 110} : {marginTop: '1%'}
 
     let imagePadding = (Object.keys(this.props.headerStyle).length != 0) ? {marginTop: '-5%'} : {}
     let contactStyle = (Object.keys(this.props.headerStyle).length != 0) ? {textDecoration: 'none', color: 'black', fontColor: 'black', fontWeight: 'bold', fontSize: '14px'} : {textDecoration: 'none', fontColor: 'white', fontSize: '14px', fontWeight: 'bold', color: 'white'}
@@ -66,7 +66,7 @@ export default class Header extends Component {
       </Breakpoint>
         <Breakpoint large up>
         <nav>
-          <Row style={{...{padding: '1%', zIndex: 9999999999999999}, ...this.props.headerStyle}}>
+          <Row style={{...{width: '40%', padding: '1%', zIndex: 9999999999999999}, ...this.props.headerStyle}}>
             <Col lg={3}>
               <Link to="/">
                 <img src={logo} width="50%" height="100%" style={imagePadding}/>
@@ -82,7 +82,7 @@ export default class Header extends Component {
                 <Link style={colorStyleB} to={`/#ourAgents`}>Meet Your Agent</Link>
             </Col>
             <Col lg={3} style={{cursor: 'pointer'}}>
-                <span onClick={this.toggleLoginModal.bind(this)} style={{marginLeft: '10%'}}><img src={account} width="10%" height="50%" /><span style={{...colorStyleB, ...{marginTop: '50%'}}}>Sign In</span></span>
+                <span onClick={this.toggleLoginModal.bind(this)} style={{marginLeft: '10%'}}><img src={account} width="10%" height="50%" /><span style={{...colorStyleB, ...{marginLeft: '2.5%', marginTop: '50%'}}}>Sign In</span></span>
             </Col>
           </Row>
           </nav>
@@ -145,6 +145,6 @@ const styles = {
     background: 'url(./../../images/search.png) no-repeat scroll 557px 7px',
     paddingLeft:'30px'
   },
-  p: {marginBottom: '1000%', zIndex: 999999999999, padding: '4%', paddingBottom:'10%', height: '10%', backgroundColor: 'white', borderBottomStyle: 'solid', borderBottomColor: '#B22222', position:'fixed', },
+  p: {marginBottom: '1000%', zIndex: 999999999999, padding: '4%', paddingBottom:'10%', height: '10%', backgroundColor: 'white', borderBottomStyle: 'solid', borderBottomColor: '#B22222', position:'fixed', paddingLeft: '10%' },
   q: {padding: '3%', zIndex: 999999999999, width: '100%', height: '100%', opacity: '1', position: 'fixed', color: 'white', marginTop: '17.5%', backgroundColor: '#5E1914'}
 }

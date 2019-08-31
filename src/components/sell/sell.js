@@ -222,14 +222,14 @@ const styles = {
     paddingLeft: "6%"
   },
   featuresHeader: {
-     paddingTop: '7.5%',
-     paddingLeft: '7%',
-     paddingRight: '7%'
+     paddingTop: '10.5%',
+     paddingLeft: '10.5%',
+     paddingRight: '10.5%'
   },
   features: {
     backgroundColor: "white",
-    width: "25%",
-    height: "20%",
+    //width: "25%",
+    //height: "20%",
     display: "inline",
     padding: '3%',
     paddingRight: "3%",

@@ -53,7 +53,7 @@ export default class LoginB extends Component {
     )
   }
   toggleLoading(loading) {
-    this.setState({loading})
+    this.props.toggleLoading(loading)
   }
   login() {
     const { email, password } = this.state
@@ -79,7 +79,7 @@ export default class LoginB extends Component {
             alert(data.msg)
           }
         })
-        .catch(err =>{ alert("Can't conect to Trent Realtor's server at the moment"); this.toggleLoading(false)})
+        .catch(err =>{ alert("Can't cconect to Trent Realtor's server at the moment"); this.toggleLoading(false)})
       }.bind(this));
     }
     else{

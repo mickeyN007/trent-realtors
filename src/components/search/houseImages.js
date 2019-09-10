@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Row, Col, Dropdown,  } from 'react-bootstrap';
+import { Row, Col,  } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 
 import AwesomeSlider from 'react-awesome-slider';
@@ -8,7 +8,7 @@ import 'react-awesome-slider/dist/styles.css';
 export default class HouseImages extends Component {
 
   render() {
-    var items = this.props.house.images.map((img) =>  { return{original: img}})
+    //var items = this.props.house.images.map((img) =>  { return{original: img}})
     // return <ImageGallery items={items} />
     return (
       <div>

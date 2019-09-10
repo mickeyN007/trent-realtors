@@ -6,20 +6,15 @@ import './../../css/header.css'
 // import AvailableHouses from './../ads/availableHouses'
 // imported components
 import Header from './../header/Header'
-import BoxImage from './BoxImage'
 import Footer from './../footer/footer'
 import SponsoredHouses from './../ads/sponsoredHouses'
 import LoadingScreen from './../loadingScreen'
-import Slider from 'react-animated-slider';
-import horizontalCss from 'react-animated-slider/build/horizontal.css';
 
 // images
 import blackHouseB from './../../images/blackHouseB.jpg'
-import blackHouse2 from './../../images/blackHouse2.jpg'
 import blackHouse4 from './../../images/blackHouse4.jpg'
 
 
-import leftArrow from './../../images/leftArrow.png'
 import rightArrow from './../../images/rightArrow.png'
 
 export default class Home extends Component {
@@ -43,39 +38,6 @@ export default class Home extends Component {
     window.scrollTo({ left, top});
   }
   render() {
-    //alert(this.state.showAvailableHouses)
-
-    const listA = [
-      "A ddddedicated, full service local licensed real estate agent",
-      "A commitment to getting the best price for you",
-      "A professional photography suite, yard sign and 3-D virtual tour",
-    ]
-
-    const listB = [
-      "Listing on all major listing sites and your local MLS",
-      "A Trent Realtors account accessed on your desktop or mobile device",
-      "Exclusive early access to buyers through our 'Coming Soon' listing feature",
-    ]
-
-    const ourProcess = [
-      {
-        name: "Book a Listing Appointment",
-        desc: "Meet with a Trent Realtors' agent to get a comparative market analysis of your home. Discover your home’s value and talk market trends to develop a successful listing. Your agent will arrange for high-quality photos and a 3-D virtual tour of your home."
-      },
-      {
-        name: "List Your Home",
-        desc: "We’ll list your home through the MLS and all other major listing sites. We’ll start marketing your property right away through our website and with a yard sign, advertising, open houses and more. We’ll also introduce your listing to an extensive group of people looking for a home in your area."
-      },
-      {
-        name: "Get Support at Every Step",
-        desc: "Receive offers, negotiate feedback on your home and schedule open houses and private showings 24/7 through your Trent Realtors account. Your agent and our wider customer service team will be with you every step of the way to advise, dialogue with potential buyers, and advocate for you."
-      },
-      {
-        name: "Close With Confidence",
-        desc: "Should you choose, we’ll support you through legal and compliance requirements so you can close quickly and get on with the things that matter most in life."
-      },
-    ]
-
     var noAgentFound =
     <div style={{padding: '10%', backgroundColor: '#F5F5F5'}}>
         <h2>We're having trouble finding the price for your zip code, but don't worry</h2>
@@ -89,7 +51,7 @@ export default class Home extends Component {
     if (true)return (
       <div style={styles.container}>
         <div id={id}>
-          <Header toggleLoading={this.toggleLoading.bind(this)} headerStyle={this.props.headerStyle} search={this.search.bind(this)} toggleLoginModal={this.toggleLoading.bind(this)}/>
+          <Header {...this.props} toggleLoading={this.toggleLoading.bind(this)} headerStyle={this.props.headerStyle} search={this.search.bind(this)} toggleLoginModal={this.toggleLoading.bind(this)}/>
         </div>
         <Container style={{zIndex: 2, paddingLeft: '2%', paddingTop: '2%',}}>
         <Row>
@@ -181,28 +143,7 @@ export default class Home extends Component {
         {this.state.loading && <LoadingScreen />}
       </div>
     )
-    // else
-    //   return <AvailableHouses showAvailableHouses={this.showAvailableHouses.bind(this)} house={this.state.house} sponsoredHouses={this.props.sponsoredHouses}/>
   }
-  /*nextProcess() {
-    var { ourProcess } = this.state.ourProcess
-    console.log(this.state.ourProcess)
-    if (this.state.ourProcess<3)
-      this.setState({ourProcess: this.state.ourProcess+1})
-    else {
-      ourProcess=0
-      this.setState({ourProcess: ourProcess})
-    }
-  }
-  previousProcess() {
-    var { ourProcess } = this.state.ourProcess
-    if (this.state.ourProcess>0)
-      this.setState({ourProcess: this.state.ourProcess-1})
-    else {
-      ourProcess=3
-      this.setState({ourProcess: ourProcess})
-    }
-  }*/
   findAgent() {
     this.toggleLoading(true)
     var result = this.props.findAgent(this.state.zipCode)
@@ -230,7 +171,6 @@ export default class Home extends Component {
 }
 
 
-const manhattan = './../../images/manhattan.jpg'
 
 const styles = {
   container: {
@@ -330,7 +270,6 @@ const styles = {
     height: "200px",
     backgroundColor: "#B22222",
     textDecoration: "none",
-    padding: "2%",
     color: "white",
     fontWeight: "bold",
     padding: '5%',
@@ -340,4 +279,3 @@ const styles = {
   }
 }
 
-//export default withRouter(Home)

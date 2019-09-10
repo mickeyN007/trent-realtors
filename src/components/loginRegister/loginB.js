@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 
 import { Link } from "react-router-dom";
-import  bcrypt from 'bcryptjs'
 
 import LoadingScreen from './../loadingScreen'
-import { Container, Row, Col, Dropdown,  } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 import { mySettings } from './../../settings'
 
@@ -57,16 +56,15 @@ export default class LoginB extends Component {
   }
   login() {
     const { email, password } = this.state
-    var body;
     if (/\S/.test(email) && /\S/.test(password)) {
       this.toggleLoading(true)
       // enrypt password
       //this.setState({loading: true})
-      bcrypt.hash(password, 10, function(err, hash) {
+      //bcrypt.hash(password, 10, function(err, hash) {
         //password = hash
 
         const {method, headers} = mySettings.optionsB
-        var body = JSON.stringify({email, password: hash})
+        var body = JSON.stringify({email, password})
         var options = {body, method, headers}
         fetch(mySettings.serverID+'api/login', options)
         .then(data => data.json())
@@ -74,17 +72,34 @@ export default class LoginB extends Component {
           this.toggleLoading(false)
 
           if (data.status)
-            this.setState({loading: false})
+            this.goToAccount(data.token)
           else {
             alert(data.msg)
           }
         })
-        .catch(err =>{ alert("Can't cconect to Trent Realtor's server at the moment"); this.toggleLoading(false)})
-      }.bind(this));
+        .catch(err =>{ alert("Can't connect to Trent Realtor's server at the moment"); this.toggleLoading(false)})
     }
     else{
       alert('Please fill all fields!')
     }
+  }
+  storeSession(token) {
+    localStorage.setItem('token', JSON.stringify(token))
+  }
+  isLoggedIn(token) {
+    return localStorage.getItem('token') ? true : false
+  }
+  logOut() {
+    localStorage.removeItem('token')
+  }
+  goToAccount(token) {
+    this.storeSession(token)
+    this.props.history.push({
+      pathname: '/account',
+      state: {
+        username: token.user.name,
+      }
+    })
   }
 }
 

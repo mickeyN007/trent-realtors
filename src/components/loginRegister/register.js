@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Container, Row, Col,  } from 'react-bootstrap';
+import { Row, Col,  } from 'react-bootstrap';
 
 import RegisterForm from './registerForm'
 export default class Register extends Component {

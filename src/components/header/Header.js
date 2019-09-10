@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
-import { Container, Row, Col, Dropdown,  } from 'react-bootstrap';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Row, Col,  } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 import Breakpoint, { BreakpointProvider } from 'react-socks';
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -10,8 +10,6 @@ import logo from './../../images/logo.PNG'
 import menu from './../../images/menu.png'
 import close from './../../images/close.png'
 
-import search from './../../images/search.png'
-import rightArrow from './../../images/rightArrow.png'
 import account from './../../images/account.png'
 
 import Login from './../loginRegister/login'
@@ -33,10 +31,7 @@ export default class Header extends Component {
     let loginPadding = (Object.keys(this.props.headerStyle).length != 0) ? {marginTop: 110} : {marginTop: '1%'}
 
     let imagePadding = (Object.keys(this.props.headerStyle).length != 0) ? {marginTop: '-5%'} : {}
-    let contactStyle = (Object.keys(this.props.headerStyle).length != 0) ? {textDecoration: 'none', color: 'black', fontColor: 'black', fontWeight: 'bold', fontSize: '14px'} : {textDecoration: 'none', fontColor: 'white', fontSize: '14px', fontWeight: 'bold', color: 'white'}
-    let rightArrowStyle = (Object.keys(this.props.headerStyle).length != 0) ? {backgroundColor: '#d1d1d1', height: '5%', marginTop: -51, position: 'aboslute'} : {backgroundColor: 'red',  height: '5%', position: 'aboslute', marginTop: 5}
-
-    let searchForHomes = (this.state.searchForHomes) ? <span><input style={styles.input}  onChange={(e) => {this.setState({location: e.target.value})}} placeholder="Search by city or state" /><span onClick={this.search.bind(this)} style={rightArrowStyle}><img style={rightArrowStyle} src={rightArrow} width='5%' /></span></span> : <span style={{marginLeft: '35%', marginTop: '-12%'}}><img src={search} width='5%' height="34%"/> <span>Search for Homes</span></span>
+    let usr = localStorage.getItem('token')
     return (
       <BreakpointProvider>
       <div style={styles.container}>
@@ -52,17 +47,22 @@ export default class Header extends Component {
             <span onClick={this.toggleShowMobileMenu.bind(this)}><img src={close}  width="80%" height="60%"/></span>
           </Col>}
         </Row>
-        {this.state.showMobileMenu && <Row style={styles.q}>
-          <Col xs={12} style={{width: '1%', color: 'white'}}>
+        {this.state.showMobileMenu && <div style={styles.q}>
+          <div style={styles.nav_mob}>
           <Link style={colorStyle} to="/buy/">Buy a Home</Link>
-          </Col>
-          <Col xs={12} style={{width: '100%', color: 'white'}}>
+          </div>
+          <div style={styles.nav_mob}>
           <Link  style={colorStyle} to="/sell/">Sell Your Home</Link>
-          </Col>
-          <Col xs={12} style={{width: '100%', color: 'white'}}>
+          </div>
+          <div style={styles.nav_mob}>
           <Link style={colorStyle} to="/#ourAgents/">Meet Your Agent</Link>
-          </Col>
-        </Row>}
+          </div>
+          <div style={styles.nav_mob}>
+          <Link style={colorStyle} to="/account">{usr ? 'Account' : 'Log In / Register'}</Link>
+          </div>
+
+
+        </div>}
       </Breakpoint>
         <Breakpoint large up>
         <nav>
@@ -81,14 +81,17 @@ export default class Header extends Component {
             <Col lg={2}>
                 <Link style={colorStyleB} to={`/#ourAgents`}>Meet Your Agent</Link>
             </Col>
-            <Col lg={3} style={{cursor: 'pointer'}}>
-                <span onClick={this.toggleLoginModal.bind(this)} style={{marginLeft: '10%'}}><img src={account} width="10%" height="50%" /><span style={{...colorStyleB, ...{marginLeft: '2.5%', marginTop: '50%'}}}>Sign In</span></span>
-            </Col>
+            {usr==null && <Col lg={3} style={{cursor: 'pointer'}}>
+                <span onClick={this.toggleLoginModal.bind(this)} style={{marginLeft: '10%'}}><img src={account} width="10%" height="50%" /><span style={{...colorStyleB, ...{marginLeft: '2.5%', marginTop: '50%'}}}>Sign In / Register</span></span>
+            </Col>}
+            {usr && <Col lg={3} style={{cursor: 'pointer'}}>
+                <Link to={'/account'} style={{marginLeft: '10%'}}><img src={account} width="10%" height="50%" /><span style={{...colorStyleB, ...{marginLeft: '2.5%', marginTop: '50%'}}}>Account</span></Link>
+            </Col>}
           </Row>
           </nav>
           {this.state.showLoginModal && <Row>
             <Col lg={12}>
-               <Login loginPadding={loginPadding} toggleLoading={this.toggleLoading.bind(this)}/>
+               <Login {...this.props} loginPadding={loginPadding} toggleLoading={this.toggleLoading.bind(this)}/>
             </Col>
           </Row>}
         </Breakpoint>
@@ -145,6 +148,13 @@ const styles = {
     background: 'url(./../../images/search.png) no-repeat scroll 557px 7px',
     paddingLeft:'30px'
   },
+  nav_mob: {
+    width: '100%',
+    padding: '3%',
+    borderBottomStyle: 'solid',
+    cursor: 'pointer',
+    borderBottomWidth: 1, borderBottomColor: 'white'
+         },
   p: {marginBottom: '1000%', zIndex: 999999999999, padding: '4%', paddingBottom:'10%', height: '10%', backgroundColor: 'white', borderBottomStyle: 'solid', borderBottomColor: '#B22222', position:'fixed', paddingLeft: '10%' },
-  q: {padding: '3%', zIndex: 999999999999, width: '100%', height: '100%', opacity: '1', position: 'fixed', color: 'white', marginTop: '17.5%', backgroundColor: '#5E1914'}
+  q: {zIndex: 999999999999, width: '100%', height: '100%', opacity: '1', position: 'fixed', color: 'white', marginTop: '20.5%', backgroundColor: '#5E1914'}
 }

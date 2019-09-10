@@ -1,8 +1,8 @@
 import React, { Component } from "react"
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import AvailableDates from './../availableDates'
-import { Container, Row, Col,  } from 'react-bootstrap';
+import { Row, Col,  } from 'react-bootstrap';
 import Breakpoint, { BreakpointProvider } from 'react-socks';
 
 import logo from "./../../images/logo.PNG"
@@ -163,7 +163,7 @@ export default class Valuation extends Component {
     email, location } = this.state
     //const date = new Date()
     var { time, date} = this.state
-    var date = new Date(`${date} ${time}`)
+    date = new Date(`${date} ${time}`)
     //var t = `${date.toString() }${time.toString() }`
 
     fetch(mySettings.serverID+"api/bookAppt", {
@@ -206,7 +206,7 @@ export default class Valuation extends Component {
       status: false,
       msg: ''
     }
-    const { time, date, location, firstname, lastname, phone, email } = this.state
+    const { time, date, firstname, lastname, phone, email } = this.state
     var validEmail = this.validateEmail(email)
     if (/\S/.test(time)==false || /\S/.test(date)==false || /\S/.test(phone)==false || /\S/.test(firstname)==false || /\S/.test(lastname)==false || validEmail==false) {
       if (!validEmail)

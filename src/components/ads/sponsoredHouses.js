@@ -7,7 +7,6 @@ import './../../css/availableHouses.css'
 const MenuItem = ({house, selected}) => {
   //var images =
   //var img = './../../images/account.png'
-  var img = 'https://s18.postimg.cc/9vhgup22x/img1.jpg'
   var img = house.images[0]
   console.log(img)
   return <div
@@ -26,7 +25,6 @@ export const Menu = (list, selected) =>{
   console.log(list)
 
   return list.map(house => {
-    const {name} = house;
     return <MenuItem house={house} key={JSON.stringify(house)} selected={selected} />;
   })};
 
@@ -60,7 +58,7 @@ export default class SponsoredHouses extends Component {
     // var house = {name: key}
     const { history, sponsoredHouses, } = this.props
     history.push({
-      pathname: '/search',
+      pathname: '/property',
       state: {
         properties: sponsoredHouses,
         house

@@ -27,6 +27,15 @@ export default class Offer extends Component {
               style={{width: '90%', padding: '2%'}}
             />
           </Col>
+          {localStorage.getItem('token')== null && <Col lg={12} md={12} style={styles.col}>
+            <span style={styles.color}>* Email</span><br />
+            <input
+              value={this.state.email}
+              onChange={(e) => this.setState({email: e.target.value})}
+              style={{width: '90%', padding: '2%'}}
+            />
+          </Col>
+          }
           <Col lg={12} md={12} style={styles.col}>
             <span style={styles.color}>* Offer</span><br />
             <input
@@ -82,13 +91,18 @@ export default class Offer extends Component {
       status: false,
       msg: ''
     }
-    const { msg, offer } = this.state
+    const { msg, offer, email } = this.state
+    const usr = localStorage.getItem('token')
+    if (usr !== null || /\S/.test(email)) {
     if (/\S/.test(msg)==false || /\S/.test(offer)==false) {
       err.msg = 'Please fill all fields!'
     }
     else {
       err.status = true
     }
+    }
+    else
+      err.msg = 'Please fill all fields'
     return err
   }
 }

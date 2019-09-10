@@ -4,8 +4,6 @@ import { Container, Row, Col } from 'react-bootstrap'
 import {
   Button,
 } from '@material-ui/core'
-import { makeStyles } from '@material-ui/styles';
-import { styled } from '@material-ui/styles';
 import CustomDrawer from './customDrawer'
 import Breakpoint, { BreakpointProvider } from 'react-socks'
 
@@ -22,6 +20,9 @@ import Appointments from './appointments'
 import Callbacks from './callbacks'
 import Subscribers from './subscribers'
 
+import LoadingScreen from './../loadingScreen'
+
+import { mySettings } from './../../settings.js'
 //import usersImg from 'images/home.png'
 
 export default class AdminDashboard extends Component {
@@ -29,7 +30,11 @@ export default class AdminDashboard extends Component {
     super()
     this.state = {
       view: true,
-      display: 'Dashboard'
+      display: 'Dashboard',
+      loading: false,
+      users: [],
+      houses: [],
+      appointments:[], callbacks:[], subscribers:[]
     }
   }
   /*componentDidMount() {
@@ -38,6 +43,9 @@ export default class AdminDashboard extends Component {
   componentDidUnmount() {
     window.removeEventListener('resize', this.resize.bind(this))
   }*/
+  componentDidMount() {
+    this.getData()
+  }
   render() {
     return (
       <Container fluid>
@@ -48,7 +56,17 @@ export default class AdminDashboard extends Component {
         </Row>
         <Row style={styles.header}>
           <Col xs={7} md={7}><h5 style={{color: 'black'}}>Welcome, {this.props.name}</h5></Col>
-          <Col xs={5} md={5}><p style={{fontSize: 11, color: 'black'}}>{new Date().toString().split('GMT')[0]}</p></Col>
+          <Col xs={5} md={5}>
+                <Col xs={12} lg={12}>
+                <p style={{fontSize: 11, color: 'black'}}>
+                  {new Date().toString().split('GMT')[0]}
+                </p>
+                </Col>
+                <Col xs={12} lg={12} onClick={this.logOut.bind(this)}>
+                  <img src={require('./../../images/logout.jpeg')} />
+                </Col>
+
+          </Col>
           </Row>
           <Container style={{marginLeft: '2.5%', marginRight: '2.5%'}}>
             {this.display()}
@@ -60,7 +78,16 @@ export default class AdminDashboard extends Component {
           <Col lg={11}>
             <Row style={styles.headerB}>
                <Col xs={7} lg={7}><h5 style={{color: 'black'}}>Welcome, {this.props.name}</h5></Col>
-              <Col xs={5} lg={5}><p style={{fontSize: 11, color: 'black'}}>{new Date().toString().split('GMT')[0]}</p></Col>
+              <Col xs={5} lg={5}>
+                <Col xs={12} lg={12}>
+                <p style={{fontSize: 11, color: 'black'}}>
+                  {new Date().toString().split('GMT')[0]}
+                </p>
+                </Col>
+                <Col xs={12} lg={12} onClick={this.logOut.bind(this)}>
+                  <img src={require('./../../images/logout.jpeg')} width='10%'/>
+                </Col>
+              </Col>
             </Row>
             <Row>
               <Container style={{marginLeft: '10.5%', marginRight: '2.5%'}}>
@@ -70,8 +97,8 @@ export default class AdminDashboard extends Component {
           </Col>
         </Row>
         </Breakpoint>
-
         </BreakpointProvider>
+        {this.state.loading && <LoadingScreen />}
       </Container>
     )
   }
@@ -193,7 +220,7 @@ export default class AdminDashboard extends Component {
             <Col lg={4}>
               {
                 i+1<menu.length &&
-                   <Card style={styles.card} onClick={this.changeMenu.bind(this, menu[i].name)}>
+                   <Card style={styles.card} onClick={this.changeMenu.bind(this, menu[i+1].name)}>
       <CardActionArea>
         <CardMedia
           style={media}
@@ -222,7 +249,7 @@ export default class AdminDashboard extends Component {
             <Col lg={4}>
               {
                 i+1<menu.length-1 &&
-                    <Card style={styles.card} onClick={this.changeMenu.bind(this, menu[i].name)}>
+                    <Card style={styles.card} onClick={this.changeMenu.bind(this, menu[i+2].name)}>
       <CardActionArea>
         <CardMedia
           style={media}
@@ -254,7 +281,6 @@ export default class AdminDashboard extends Component {
     return display
   }
   resize() {
-    alert(window.innerWidth)
     if (window.innerWidth<=991) {
       this.setState({view: true})
     }
@@ -263,13 +289,13 @@ export default class AdminDashboard extends Component {
     }
   }
   display() {
-    const { users, houses } = this.props.data
+    const { users, houses, appointments, callbacks, subscribers } = this.state
     const menu = {
       Users: <Users users={users}/>,
       Houses: <Houses houses={houses}/>,
-      Appointments: <Appointments />,
-      Callbacks: <Callbacks />,
-      Subscribers: <Subscribers />
+      Appointments: <Appointments appointments={appointments} />,
+      Callbacks: <Callbacks callbacks={callbacks}/>,
+      Subscribers: <Subscribers subscribers={subscribers}/>
     }
     //alert(this.state.display)
     if (this.state.display !== 'Dashboard')
@@ -278,19 +304,92 @@ export default class AdminDashboard extends Component {
       return this.displayMenu()
   }
   changeMenu(display) {
-    this.setState({display})
+    if (display=='Listing Appointments')
+      this.setState({display: 'Appointments'})
+    else
+      this.setState({display})
+  }
+  getUsers() {
+    this.toggleLoading(true)
+    fetch(mySettings.serverID+'api/getUsers')
+      .then(users => users.json())
+      .then(users => {
+          this.setState({users})
+          this.toggleLoading(false)
+        })
+      .catch(err => {
+        alert("Can't connect to Trent Realtor's server at the moment!")
+        this.toggleLoading(false)
+      })
+  }
+  getHouses() {
+    this.toggleLoading(true)
+    fetch(mySettings.serverID+'api/getHouses')
+      .then(houses => houses.json())
+      .then(houses => {
+          this.setState({houses})
+          this.toggleLoading(false)
+        })
+      .catch(err => {
+        alert("Can't connect to Trent Realtor's server at the moment!")
+        this.toggleLoading(false)
+      })
+  }
+  getSubscribers() {
+    this.toggleLoading(true)
+    fetch(mySettings.serverID+'api/getSubscribers')
+      .then(subscribers => subscribers.json())
+      .then(subscribers => {
+          this.setState({subscribers})
+          this.toggleLoading(false)
+        })
+      .catch(err => {
+        alert("Can't connect to Trent Realtor's server at the moment!")
+        this.toggleLoading(false)
+      })
+  }
+  getAppointments() {
+    this.toggleLoading(true)
+    fetch(mySettings.serverID+'api/getAppointments')
+      .then(appointments => appointments.json())
+      .then(appointments => {
+          this.setState({appointments})
+          this.toggleLoading(false)
+        })
+      .catch(err => {
+        alert("Can't connect to Trent Realtor's server at the moment!")
+        this.toggleLoading(false)
+      })
+  }
+  getCallbacks() {
+    this.toggleLoading(true)
+    fetch(mySettings.serverID+'api/getCallbacks')
+      .then(callbacks => callbacks.json())
+      .then(callbacks => {
+          this.setState({callbacks})
+          this.toggleLoading(false)
+        })
+      .catch(err => {
+        alert("Can't connect to Trent Realtor's server at the moment!")
+        this.toggleLoading(false)
+      })
+  }
+
+  getData() {
+    this.getUsers()
+    this.getHouses()
+    this.getAppointments()
+    this.getCallbacks()
+    this.getSubscribers()
+  }
+  toggleLoading(loading) {
+    this.setState({loading})
+  }
+  logOut() {
+    localStorage.removeItem('token')
+    window.location.href='/admin'
   }
 }
-
-const MyButton = styled(Button)({
-  background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-  border: 0,
-  borderRadius: 3,
-  boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-  color: 'white',
-  height: 48,
-  padding: '0 30px',
-});
 
 const styles = {
   header: {

@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
 
-import { Container, Row, Col, Dropdown,  } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.css';
-import Breakpoint, { BreakpointProvider } from 'react-socks';
+import { Container  } from 'react-bootstrap';
+import { BreakpointProvider } from 'react-socks';
 
 export default class MyProperties extends Component {
-  constructor() {
-    super()
-  }
   render() {
     return (
       <BreakpointProvider>
@@ -22,8 +18,4 @@ export default class MyProperties extends Component {
   displayView() {
     return <div><center>Coming soon..</center></div>
   }
-}
-
-const styles = {
-  //container={}
 }

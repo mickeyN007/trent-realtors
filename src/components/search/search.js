@@ -1,13 +1,13 @@
 import React, { Component } from "react"
 
 //import './../../css/buyHeader.css'
-import Footer from './../footer/footer'
+//import Footer from './../footer/footer'
 
-import Filter from './filter'
+//import Filter from './filter'
 import NoProperty from './noProperty'
 import Properties from './properties'
 
-import { mySettings } from "./../../settings"
+//import { mySettings } from "./../../settings"
 
 export default class Search extends Component {
   constructor() {
@@ -30,12 +30,13 @@ export default class Search extends Component {
     )
   }
   displayView() {
+    //alert(Object.keys(this.props.location.state))
     if (this.props.location.state==undefined) {
       this.props.location.state = {
         house: {}, properties:[]
       }
       const views = {
-          notfound: <NoProperty location={this.props.location} />,
+          notfound: <NoProperty location='' />,
           found: <Properties {...this.props}  />
         }
         if (this.props.location.state.properties.length > 0) {
@@ -43,9 +44,10 @@ export default class Search extends Component {
         }
         else return views['notfound']}
     else
-  {  const views = {
-      notfound: <NoProperty location={this.props.location} />,
-      found: <Properties {...this.props} house={this.props.location.state.house} sponsoredHouses={this.props.location.state.properties} />
+  {
+    const views = {
+      notfound: <NoProperty {...this.props} location={this.props.location.state.location} />,
+      found: <Properties {...this.props}  properties={this.props.location.state.properties} />
     }
     if (this.props.location.state.properties.length > 0) {
       return views['found']

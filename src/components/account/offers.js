@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
 
-import { Container, Row, Col, Dropdown,  } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.css';
-import Breakpoint, { BreakpointProvider } from 'react-socks';
+import { BreakpointProvider } from 'react-socks';
+import { Container,  } from 'react-bootstrap';
 
 export default class Offers extends Component {
-  constructor() {
-    super()
-  }
   render() {
     return (
       <BreakpointProvider>
@@ -24,6 +20,3 @@ export default class Offers extends Component {
   }
 }
 
-const styles = {
-  //container={}
-}

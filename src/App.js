@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 // import Admin from "./components/admin/layouts/Admin.jsx";
 
 // router
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route,  } from "react-router-dom";
 import { mySettings } from './settings.js'
 //import './css/main.css'
 
@@ -14,6 +13,8 @@ import Sell from './components/sell/sell'
 import Buy from './components/buy/buy'
 import Valuation from './components/valuation/valuation'
 import Search from './components/search/search'
+import Property from './components/search/property'
+
 import LoginRegister from './components/loginRegister/loginRegister'
 import Account from './components/account/account'
 import Admin from "./components/admin/admin";
@@ -25,6 +26,7 @@ const hist = createBrowserHistory();
 export default class App extends Component {
   constructor() {
     super()
+    this.refToggleLoading = React.createRef()
     this.state = {
       headerStyle: {
       zIndex: 9999999999999,
@@ -100,6 +102,7 @@ export default class App extends Component {
             path="/buy/"
             render={(props) =>
               <Buy {...props}
+                ref={this.refToggleLoading}
                 search={this.search.bind(this)}
                 //subscribeToNewsletter={this.subscribeToNewsletter.bind(this)}
                 headerStyle={this.state.headerStyleB}
@@ -129,7 +132,7 @@ export default class App extends Component {
             path="/account/"
             render={(props) =>
               <Account {...props}
-                username={this.state.username}
+                logOut={this.logOut.bind(this)}
               />
             }
           />
@@ -148,6 +151,15 @@ export default class App extends Component {
                   //location={this.state.location}
                   properties={this.state.properties}
                   search={this.search.bind(this)}
+              />
+            }
+          />
+          <Route
+            path="/property/"
+            render={(props) =>
+              <Property {...props}
+                  properties={this.state.properties}
+                  house={[]}
               />
             }
           />
@@ -184,50 +196,56 @@ export default class App extends Component {
   }
   search(location) {
     //this.setState({})
-    alert(location)
+    if (/\S/.test(location)) {
+      const {method, headers} = mySettings.optionsB
+      var body = JSON.stringify({location})
+      var options = {method, headers, body}
     this.setState({location})
-    fetch(mySettings.serverID+'/api/search',
-      mySettings.optionsB
-    )
+    fetch(mySettings.serverID+'api/search',options)
     .then(res => res.json())
-    .then(data => {
-      const { properties } = data
+    .then(properties => {
+      //const { properties } = data
       this.setState({properties})
-      alert('fff')
       hist.push({
         pathname: '/search',
         state: {
           properties,
-          house: {},
           location
         }
       })
+      this.toggleLoading(false)
+      window.location.href = '/search'
+      //return true
       //return {data, error: "Success"}
     })
     .catch(err => {
-      alert('gg')
-      hist.push({
-        pathname: '/search',
-        state: {
-          properties: [],
-          house: {},
-          location
-        }
-      })
+      //return true
+      this.toggleLoading(false)
+      alert("Can't connect to Trent Realtor's server at the moment")
     })
+    }
+    else {
+      //return true
+      alert('Enter an address')
+      this.toggleLoading(false)
+    }
   }
   subscribeToNewsletter(email) {
     //console.log(email)
+  }
+  toggleLoading(loading) {
+    //alert(Object.keys(this.refToggleLoading.current))
+    this.refToggleLoading.current.toggleLoading(loading)
   }
   sponsoredHouses() {
     this.setState({
       sponsoredHouses:
         [
-          {price: '2000000', neighborhood: 'Great established neighborhood about 15 minute walk up Main Street to downtown shops and restaurants. Napa neighborhoods/streets are very diverse regarding types of houses, parking, etc. The Farmhouse sits on beautiful part of Main Street with great parking.', description: 'Completely renovated quality 31-foot Airstream in the backyard of the Main Street Farmhouse. Sealy Posturpedic Full bed, bathroom, kitchenette, couch, dinette, flatscreen TV and wifi. Sorry, NO PETS allowed. We allow cooking our farm fresh eggs but no cooking meats, bacon, sausage, fish, etc. in the unit. Not suitable for children under the age of 12 years. Community fee (local lodging tax of 14%) is added to reservation when confirmed by guest.', features: [], type: 'Sale', name: "Off 69th road Gwarinpa estate Abuja", images: ['https://i.ibb.co/Y7vfqdR/20190502-132402.jpg','https://i.ibb.co/rQrrtvB/20190502-132332.jpg', 'https://i.ibb.co/7y0MbJX/20190502-132425.jpg',]},
-          {price: '2000000', neighborhood: '', description: '', features: ['3 Bedrooms', '3 Toilets', '3 Kitchens'], type: 'Rent', name: "AB Close off 1st Avenue Gwarinpa ", images: ['https://i.ibb.co/RHdprzd/20181226-132113.jpg']},
-          {price: '2000000', neighborhood: '', description: '', features: [], type: 'Sale', name: "Off Lake Chad, Maitama", images: ['https://i.ibb.co/bJJ6yG7/IMG-20190507-WA0062.jpg']},
-          {price: '2000000', neighborhood: '', description: '', features: [], type: 'Sale', name: "By sigma apartment Jabi", images: ['https://i.ibb.co/kc4CYjD/sigma.jpg']},
-          {price: '2000000', neighborhood: '', description: '', features: [], type: 'Sale', name: "Efab Metropolis Gwarinpa", images: ['https://i.ibb.co/RbK23Z7/Efab-Metropolis-Gwarinpa.jpg']}
+          {email: 'admin', price: '2000000', neighborhood: 'Great established neighborhood about 15 minute walk up Main Street to downtown shops and restaurants. Napa neighborhoods/streets are very diverse regarding types of houses, parking, etc. The Farmhouse sits on beautiful part of Main Street with great parking.', description: 'Completely renovated quality 31-foot Airstream in the backyard of the Main Street Farmhouse. Sealy Posturpedic Full bed, bathroom, kitchenette, couch, dinette, flatscreen TV and wifi. Sorry, NO PETS allowed. We allow cooking our farm fresh eggs but no cooking meats, bacon, sausage, fish, etc. in the unit. Not suitable for children under the age of 12 years. Community fee (local lodging tax of 14%) is added to reservation when confirmed by guest.', features: [], type: 'Sale', name: "Off 69th road Gwarinpa estate Abuja", images: ['https://i.ibb.co/Y7vfqdR/20190502-132402.jpg','https://i.ibb.co/rQrrtvB/20190502-132332.jpg', 'https://i.ibb.co/7y0MbJX/20190502-132425.jpg',]},
+          {email: 'admin', price: '2000000', neighborhood: '', description: '', features: ['3 Bedrooms', '3 Toilets', '3 Kitchens'], type: 'Rent', name: "AB Close off 1st Avenue Gwarinpa ", images: ['https://i.ibb.co/RHdprzd/20181226-132113.jpg']},
+          {email: 'admin', price: '2000000', neighborhood: '', description: '', features: [], type: 'Sale', name: "Off Lake Chad, Maitama", images: ['https://i.ibb.co/bJJ6yG7/IMG-20190507-WA0062.jpg']},
+          {email: 'admin', price: '2000000', neighborhood: '', description: '', features: [], type: 'Sale', name: "By sigma apartment Jabi", images: ['https://i.ibb.co/kc4CYjD/sigma.jpg']},
+          {email: 'admin', price: '2000000', neighborhood: '', description: '', features: [], type: 'Sale', name: "Efab Metropolis Gwarinpa", images: ['https://i.ibb.co/RbK23Z7/Efab-Metropolis-Gwarinpa.jpg']}
         ]
       })
   }
@@ -271,5 +289,15 @@ export default class App extends Component {
       // ( window.scrollY <= 40 && window.scrollY > 10) {
       this.setState({headerStyle,headerStyleB})
     }
+  }
+  storeSession(token) {
+    localStorage.setItem('token', JSON.stringify(token))
+  }
+  isLoggedIn(token) {
+    return localStorage.getItem('token') ? true : false
+  }
+  logOut() {
+    localStorage.removeItem('token')
+    window.location.href='/loginRegister'
   }
 }

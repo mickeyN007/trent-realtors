@@ -1,23 +1,30 @@
 import React, { Component } from 'react'
 
 import { Link } from "react-router-dom";
-import Header from './../header/HeaderB'
+import Header from './../header/Header'
+import LoadingScreen from './../loadingScreen'
 
 import Map from './../map'
-import { Container, Row, Col, Dropdown,  } from 'react-bootstrap';
+import { Row, Col,  } from 'react-bootstrap';
 
 export default class NoProperty extends Component {
+  constructor() {
+    super()
+    this.state = {
+      loading: false
+    }
+  }
   render() {
     return (
       <div>
-      <Header headerStyle={styles.headerStyle} />
+      <Header {...this.props} headerStyle={styles.headerStyle} toggleLoading={this.toggleLoading.bind(this)}/>
       <div style={styles.container}>
         <Row>
 
 
         <Col xs={12} lg={6}>
           <center><h3><b>Sorry, we are not currently operating in your area:</b></h3></center>
-          <center><h1>h</h1></center>
+          <center><h1>{this.props.location}</h1></center>
 
           <center>
 
@@ -41,14 +48,17 @@ export default class NoProperty extends Component {
         </Col>
         </Row>
       </div>
+      {this.state.loading && <LoadingScreen /> }
       </div>
     )
+  }
+  toggleLoading(loading) {
+    this.setState({loading})
   }
 }
 
 const styles = {
   container: {
-    backgroundColor: 'red',
     flex: 1,
     backgroundColor: '#F5F5F5',
     paddingTop: 150,
@@ -72,7 +82,6 @@ const styles = {
     marginTop: '5%',
     width: '55%',
     float: 'left',
-    backgroundColor: 'red',
     backgroundColor: '#F5F5F5',
   },
   box: {
@@ -85,6 +94,17 @@ const styles = {
     fontStyle: 'bold'
   },
   headerStyle: {
-
+    backgroundColor: "white",
+    color: "black",
+    fontWeight: "bold",
+    position: 'fixed',
+    height: "100px",
+    paddingTop: '2%',
+    paddingBottom: '0',
+    margin: 0,
+    paddingLeft: '10%',
+    width: '100%',
+    borderColor: '#B22222',
+    borderBottomStyle: 'solid',
   },
 }

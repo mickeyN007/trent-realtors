@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Row, Col, Dropdown,  } from 'react-bootstrap';
+import { Row, Col, } from 'react-bootstrap';
 
 export default class Filter extends Component {
   constructor() {

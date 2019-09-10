@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Row, Col, Dropdown,  } from 'react-bootstrap';
+import { Row, Col,  } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Breakpoint, { BreakpointProvider } from 'react-socks';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -25,6 +25,7 @@ export default class Header extends Component {
     let imagePadding = (Object.keys(this.props.headerStyle).length != 0) ? {marginTop: '-5%'} : {}
     let loginPadding = (Object.keys(this.props.headerStyle).length != 0) ? {marginTop: 110} : {marginTop: '1%'}
     let mColorStyle = {color: 'white', cursor: 'pointer'}
+    let usr = localStorage.getItem('token')
     //(Object.keys(this.props.headerStyle).length != 0) ? {color: "black"} : {color: "white"}
     return (
       <BreakpointProvider>
@@ -43,23 +44,23 @@ export default class Header extends Component {
             <span onClick={this.toggleShowMobileMenu.bind(this)}><img src={close}  width="80%" height="60%"/></span>
           </Col>}
           </Row>
-          {this.state.showMobileMenu && <Row style={{padding: '3%', zIndex: 999999999999, width: '100%', height: '100%', opacity: '1', position: 'fixed', marginTop: '17.5%', backgroundColor: '#5E1914'}}>
-            <Col xs={12} style={{height: 10, width: '1%', padding: '3%', cursor: 'pointer'}}>
+          {this.state.showMobileMenu && <div style={{padding: '3%', zIndex: 999999999999, width: '100%', height: '100%', opacity: '1', position: 'fixed', marginTop: '17.5%', backgroundColor: '#5E1914'}}>
+            <div style={styles.nav_mob}>
             <Link style={mColorStyle} to="/buy/">BUY</Link>
-            </Col>
-            <Col xs={12} style={{height: 10, width: '100%', padding: '3%', cursor: 'pointer'}}>
+            </div>
+            <div style={styles.nav_mob}>
             <Link style={mColorStyle} to="/sell/">SELL</Link>
-            </Col>
-            <Col xs={12} style={{height: '10%', width: '100%', padding: '3%', cursor: 'pointer'}}>
+            </div>
+            <div style={styles.nav_mob}>
             <Link style={mColorStyle} to="/valuation">LISTING APPOINTMENT</Link>
-            </Col>
-            <Col xs={12} style={{height: '10%', width: '100%', padding: '3%', cursor: 'pointer'}}>
+            </div>
+            <div style={styles.nav_mob}>
             <Link style={mColorStyle} to="/valuation">TOUR LISTS</Link>
-            </Col>
-            <Col xs={12} style={{height: '10%', width: '100%', padding: '3%', cursor: 'pointer'}}>
-            <Link to="/account" style={mColorStyle}>ACCOUNT</Link>
-            </Col>
-          </Row>}
+            </div>
+            <div style={styles.nav_mob}>
+            <Link to="/account" style={mColorStyle}>{usr ? 'ACCOUNT' : 'Log In / Register'}</Link>
+            </div>
+          </div>}
         </Breakpoint>
         <Breakpoint large up>
         <nav>
@@ -81,15 +82,17 @@ export default class Header extends Component {
             <Col lg={2}>
             <Link style={colorStyle} to="/valuation">LISTING APPOINTMENT</Link>
             </Col>
-
-            <Col lg={2}  style={{cursor: 'pointer'}}>
-                <span onClick={this.toggleLoginModal.bind(this)}><img src="https://img.icons8.com/cotton/64/000000/gender-neutral-user.png" width="25%" height="45%"/><span style={{...colorStyle, ...{marginTop: '50%'}}}>Sign In</span></span>
-            </Col>
+            {usr==null && <Col lg={2} style={{cursor: 'pointer'}}>
+                <span onClick={this.toggleLoginModal.bind(this)}><img src={account} width="10%" height="50%" /><span style={{...colorStyle, ...{marginLeft: '2.5%', marginTop: '50%'}}}>Sign In / Register</span></span>
+            </Col>}
+            {usr && <Col lg={2} style={{cursor: 'pointer'}}>
+                <Link style={colorStyle} to="/account"><img src={account} width="10%" height="50%" /><span style={{...colorStyle, ...{marginLeft: '2.5%', marginTop: '50%'}}}>Account</span></Link>
+            </Col>}
           </Row>
           </nav>
           {this.state.showLoginModal && <Row>
             <Col lg={12}>
-               <Login loginPadding={loginPadding}  toggleLoading={this.toggleLoading.bind(this)}/>
+               <Login {...this.props} loginPadding={loginPadding}  toggleLoading={this.toggleLoading.bind(this)}/>
             </Col>
           </Row>}
         </Breakpoint>
@@ -123,6 +126,13 @@ const styles = {
   },
   inputPS: {
     padding: "0.5%"
+  },
+  nav_mob: {
+    width: '100%',
+    padding: '3%',
+    borderBottomStyle: 'solid',
+    cursor: 'pointer',
+    borderBottomWidth: 1, borderBottomColor: 'white'
   },
   semiContainer: {zIndex: 999999999999, padding: '4%', paddingBottom:'10%', height: '10%', backgroundColor: 'white', borderBottomStyle: 'solid', borderBottomColor: '#B22222', position:'fixed', paddingLeft: '10%'}
 }

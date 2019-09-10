@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
-import { Container, Row, Col, Dropdown,  } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.css';
+import { Container, Row, Col, } from 'react-bootstrap';
 import Breakpoint, { BreakpointProvider } from 'react-socks';
 
 import Offers from './offers'
@@ -11,6 +10,8 @@ import Messages from './messages'
 import MyProperties from './myProperties'
 import Showings from './showings'
 import AccountHeader from './accountHeader'
+
+import LoginRegister from './../loginRegister/loginRegister'
 
 export default class Account extends Component {
   constructor() {
@@ -29,14 +30,16 @@ export default class Account extends Component {
     }
   }
   render() {
-    var { username, } = this.props
+    var usr = JSON.parse(localStorage.getItem('token'))
+    if (usr) {
+    var username =  usr.user.name
     return (
       <BreakpointProvider>
         <Breakpoint medium down>
         <div>
-          <AccountHeader changeView={this.changeView.bind(this)} views={this.views} username={username} />
+          <AccountHeader username={username} logOut={this.logOut.bind(this)} changeView={this.changeView.bind(this)} views={this.views} />
           <Container fluid style={{backgroundColor: 'whitesmoke'}}>
-          <Container style={{minHeight: '90vh', margin:'auto', paddingTop: '1.5%', backgroundColor: 'white'}}>
+          <Container style={{minHeight: '90vh', margin:'auto', paddingTop: 100, backgroundColor: 'white'}}>
             {this.displayView()}
           </Container>
           <Row>
@@ -49,9 +52,9 @@ export default class Account extends Component {
         </Breakpoint>
         <Breakpoint large up>
         <div>
-          <AccountHeader changeView={this.changeView.bind(this)} views={this.views} username={username} />
+          <AccountHeader username={username} logOut={this.logOut.bind(this) } changeView={this.changeView.bind(this)} views={this.views} />
           <Container fluid style={{backgroundColor: 'whitesmoke'}}>
-          <Container style={{minHeight: '75vh', margin:'auto', paddingTop: '1.5%', backgroundColor: 'white'}}>
+          <Container style={{minHeight: '75vh', margin:'auto', paddingTop: '2%', backgroundColor: 'white'}}>
             {this.displayView()}
           </Container>
           <Row>
@@ -63,13 +66,21 @@ export default class Account extends Component {
         </div>
         </Breakpoint>
       </BreakpointProvider>
-    )
+    )}
+    else
+      return <LoginRegister />
+
   }
   displayView() {
-    return this.components[this.state.view]
+      return this.components[this.state.view]
   }
+  isLoggedIn() {
+      }
   changeView(view) {
     this.setState({view})
+  }
+  logOut() {
+    this.props.logOut()
   }
 }
 

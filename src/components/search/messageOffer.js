@@ -38,7 +38,7 @@ export default class MessageOffer extends Component {
   }
   display() {
     const menu = {
-      message: <Message />,
+      message: <Message house={this.props.house}/>,
       offer: <Offer house={this.props.house} />
     }
     return menu[this.state.display]

@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
 
-import { Container, Row, Col } from 'react-bootstrap'
 import {  withStyles} from '@material-ui/core/styles';
 
 import {
   List,
-  Menu,
   Toolbar,
   Drawer,
-  InputBase,
   ListItem,
   IconButton,
   ListItemIcon,
@@ -16,26 +13,20 @@ import {
   Divider,
   AppBar,
   Badge,
-  Typography
 } from '@material-ui/core'
 
 import {
-  MoreVert as MoreIcon,
   Mail as MailIcon,
   Menu as MenuIcon,
   MoveToInbox as InboxIcon,
   Notifications as NotificationsIcon,
-  Search as SearchIcon,
   ChevronRight as ChevronRightIcon,
   ChevronLeft as ChevronLeftIcon,
   AccountCircle
 } from '@material-ui/icons';
 
-import { Link } from 'react-dom'
 import Breakpoint, { BreakpointProvider } from 'react-socks'
-import logo from './../../images/logo.PNG'
 
-const mobileMenuId = 'primary-search-account-menu-mobile';
 const menuId = 'primary-search-account-menu';
 
 const classes = {
@@ -258,7 +249,6 @@ class CustomDrawer extends Component {
     this.props.changeMenu(menu)
   }
 }
-const drawerWidth = 0;
 const styles = {
   drawer: {
     width: '400vh',

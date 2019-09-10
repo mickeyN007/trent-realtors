@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {  Link } from "react-router-dom";
 import { Container, Row, Col,  } from 'react-bootstrap';
 import LoadingScreen from './../loadingScreen'
 
@@ -7,7 +7,6 @@ import './../../css/header.css'
 
 // imported components
 import Header from './../header/Header'
-import BoxImage from './BoxImage'
 import Footer from './../footer/footer'
 import RequestCallBackForm from './../requestCallBack/requestCallBackForm'
 
@@ -67,7 +66,7 @@ export default class Sell extends Component {
     return (
       <div style={styles.container}>
         <div id='boxImageSell'>
-          <Header headerStyle={this.props.headerStyle}  search={this.search.bind(this)} toggleLoading={this.toggleLoading.bind(this)}/>
+          <Header {...this.props} headerStyle={this.props.headerStyle}  search={this.search.bind(this)} toggleLoading={this.toggleLoading.bind(this)}/>
         </div>
         <Container fluid style={{zIndex: 2, paddingTop: '2%'}}>
         <Row style={styles.featuresHeader}>

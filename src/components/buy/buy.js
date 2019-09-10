@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 
-import { Container, Row, Col, Dropdown,  } from 'react-bootstrap';
 import Breakpoint, { BreakpointProvider } from 'react-socks';
 import LoadingScreen from './../loadingScreen'
 
@@ -8,7 +7,6 @@ import LoadingScreen from './../loadingScreen'
 import Header from './../header/HeaderB'
 import Footer from './../footer/footer'
 
-import { mySettings } from "./../../settings"
 
 export default class Buy extends Component {
   constructor() {
@@ -24,7 +22,7 @@ export default class Buy extends Component {
       <div style={styles.container} onClick={this.closeLoginModal()}>
       <BreakpointProvider>
         <div id='boxImageSell'>
-          <Header closeLoginModal={this.closeLoginModal.bind(this)} headerStyle={this.props.headerStyle} search={this.search.bind(this)} toggleLoading={this.toggleLoading.bind(this)}/>
+          <Header {...this.props} closeLoginModal={this.closeLoginModal.bind(this)} headerStyle={this.props.headerStyle} search={this.search.bind(this)} toggleLoading={this.toggleLoading.bind(this)}/>
           <Breakpoint medium down>
           <center><div style={{backgroundColor: 'black', position: 'absolute', top: '73%', marginLeft: '20%', padding: '2%'}}>
             <h4>FIND YOUR DREAM HOME</h4>
@@ -53,7 +51,7 @@ export default class Buy extends Component {
         <Breakpoint large up>
         <div style={{paddingBottom: "2%", paddingTop: "10%", zIndex: -999999, position: "relative"}}>
           <center><h4>A FASTER PROCESS WHEN YOU BUY. THE FUTURE OF REAL ESTATE.</h4></center>
-          <center><h1>Innovation driving a better buyer experience</h1></center>
+          <center><h1>Innovation drivinpg a better buyer experience</h1></center>
         </div>
         </Breakpoint>
         <Footer subscribeToNewsletter={this.subscribeToNewsletter.bind(this)} />
@@ -66,7 +64,13 @@ export default class Buy extends Component {
     this.props.subscribeToNewsletter(email)
   }
   search() {
-    this.props.search(this.state.location)
+    //if (/\S/.test(this.state.location)) {
+    this.toggleLoading(true)
+        this.props.search(this.state.location)
+    /*}
+    else
+      alert("Enter an address")
+    */
   }
   componentWillMount() {
     var top=0, left=0

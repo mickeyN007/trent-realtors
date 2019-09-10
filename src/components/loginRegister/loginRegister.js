@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Container, Row, Col,  } from 'react-bootstrap';
+import { Row, Col,  } from 'react-bootstrap';
 import Breakpoint, { BreakpointProvider } from 'react-socks';
 import LoadingScreen from './../loadingScreen'
 
@@ -32,7 +32,7 @@ export default class LoginRegister extends Component {
     return (
       <div style={styles.container}>
         <BreakpointProvider>
-        <Header toggleLoading={this.toggleLoading.bind(this)} headerStyle={styles.headerStyle} />
+        <Header {...this.props} toggleLoading={this.toggleLoading.bind(this)} headerStyle={styles.headerStyle} />
         <center><div style={styles.miniContainer}>
           <Breakpoint medium down>
           <Row>
@@ -78,7 +78,7 @@ export default class LoginRegister extends Component {
   }
   displayView() {
     const menu = {
-      login: <LoginB toggleLoading={this.toggleLoading.bind(this)}/>,
+      login: <LoginB {...this.props} toggleLoading={this.toggleLoading.bind(this)}/>,
       register: <Register toggleLoading={this.toggleLoading.bind(this)} toggleView={this.toggleView.bind(this)}/>
     }
     return menu[this.state.view]

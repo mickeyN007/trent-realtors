@@ -11,7 +11,7 @@ export default class Message extends Component {
     this.state = {
       msg: '',
       to: '',
-      email: '',
+      email: null,
       subject: ''
     }
   }
@@ -19,6 +19,18 @@ export default class Message extends Component {
     return (
       <Container style={styles.container}>
         <Row style={styles.row}>
+          {localStorage.getItem('token')==null &&
+          <Col lg={12} md={12} style={styles.col}>
+            <span style={styles.color}>* Email</span><br />
+            <input
+              placeholder='Email'
+              style={{width: '90%'}}
+              value={this.state.email}
+              onChange={(e) => this.setState({email: e.target.value})}
+            />
+          </Col>
+
+          }
           <Col lg={12} md={12} style={styles.col}>
             <span style={styles.color}>* Subject</span><br />
             <input
@@ -47,7 +59,12 @@ export default class Message extends Component {
   message() {
     const valid = this.validateInfo()
     if (valid.status) {
-    const { email, msg, to, subject } = this.state
+    const { msg, subject } = this.state
+    var email = this.state.email
+    var to = this.props.house.email
+    var tmp = localStorage.getItem('token')
+    email = tmp ? JSON.parse(tmp).user.email : email
+
     fetch(mySettings.serverID+'api/message', {
       method: "POST",
       headers: {
@@ -61,6 +78,7 @@ export default class Message extends Component {
     .then((data) => {
       this.setState({msg: '',
       subject: ''})
+      alert("Your message has been sent!")
     })
     .catch((err) => alert("Can't connect to Trent Realtor's server at this time."))
     }
@@ -73,13 +91,17 @@ export default class Message extends Component {
       status: false,
       msg: ''
     }
-    const { msg, subject } = this.state
-    if (/\S/.test(msg)==false || /\S/.test(subject)==false) {
+    const { msg, subject, email, } = this.state
+    const usr = localStorage.getItem('token')
+    if (usr !== null || /\S/.test(email))
+      if (/\S/.test(msg)==false || /\S/.test(subject)==false) {
+        err.msg = 'Please fill all fields!'
+      }
+      else {
+        err.status = true
+      }
+    else
       err.msg = 'Please fill all fields!'
-    }
-    else {
-      err.status = true
-    }
     return err
   }
 }

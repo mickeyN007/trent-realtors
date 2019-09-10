@@ -4,7 +4,7 @@ import { mySettings } from './../../settings'
 import  bcrypt from 'bcryptjs'
 
 import LoadingScreen from './../loadingScreen'
-import { Container, Row, Col,  } from 'react-bootstrap';
+import { Row, Col,  } from 'react-bootstrap';
 
 export default class RegisterForm extends Component {
   constructor() {
@@ -92,7 +92,6 @@ export default class RegisterForm extends Component {
       license,
       jurisdiction
     } = this.state
-    var body;
     if (/\S/.test(email) && /\S/.test(password) && /\S/.test(firstname) && /\S/.test(lastname) && /\S/.test(confirm) && /\S/.test(phone)) {
       // if (this.props.who==="AGENT") {
       //   if (/\S/.test(license) && /\S/.test(jurisdiction))

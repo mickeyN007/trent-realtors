@@ -5,16 +5,12 @@ import { Container, Row, Col } from 'react-bootstrap'
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import cellEditFactory from 'react-bootstrap-table2-editor';
-import { Divider } from '@material-ui/core'
+
 const { SearchBar } = Search;
 
-const users = [
-  {name: 'Tiffany Oduah', type: 'Seller', status: 'Active'},
-  {name: 'Michael Oduah', type: 'Agent', status: 'Inactive'},
-  {name: 'Ekene Oduah', type: 'Buyer', status: 'Active'},
-]
 const columns = [{
   dataField: 'id',
+  formatter: (cell, row, rowIndex) => `${rowIndex+1}`,
   text: 'S/N'
 }, {
   dataField: 'name',
@@ -26,12 +22,17 @@ const columns = [{
   dataField: 'price',
   text: 'Price'
 }, {
-  dataField: 'location',
-  text: 'Location'
+  dataField: 'address',
+  text: 'Location',
+}, {
+  datafield: 'status',
+  text: 'Status',
+  formatter: (cell, row) => `${row.status ? row.status : 'pending'}`
 }];
 
-export default class iHouses extends Component {
+export default class Houses extends Component {
   render() {
+    const { houses } = this.props
     return (
       <Container style={styles.container}>
         <Row style={styles.title}>
@@ -128,7 +129,7 @@ export default class iHouses extends Component {
         <Row style={styles.marginLeft}>
               <ToolkitProvider
   keyField="id"
-  data={ users }
+  data={ houses }
   columns={ columns }
   search
   >

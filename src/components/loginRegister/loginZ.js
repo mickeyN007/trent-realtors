@@ -34,7 +34,6 @@ export default class Login extends Component {
         />
 
         <div>Trouble logging in? <Link to='/recover'>Recover your account.</Link></div>
-        <div>Don't have an account? <Link to='/LoginRegister'>Register</Link></div>
 
         <div onClick={this.login.bind(this)} style={styles.btn}>SIGN IN</div>
       </div>
@@ -85,31 +84,30 @@ export default class Login extends Component {
   goToAccount(token) {
     this.storeSession(token)
     this.props.history.push({
-      pathname: '/account',
+      pathname: '/admin',
       state: {
         username: token.user.name,
       }
     })
-    window.location.href='/account'
+    window.location.href='/admin'
   }
 }
 
 const styles = {
   container: {
     backgroundColor: 'white',
-    marginTop: '1%',
     paddingLeft: '2%',
     paddingTop: '2%',
     paddingRight: '2%',
-    position: 'fixed',
-    marginLeft: '73%',
-    width: '21%',
+    width: '50%',
     fontSize: '15px',
-    boxShadow: '1px 2px 5px 5px #888888',
-    zIndex: 9999999999
+    //boxShadow: '1px 2px 5px 5px #888888',
+    zIndex: 9999999999,
+    width: '100%'
   },
   input: {
-    padding: '3%',
+    width: '50%',
+    padding: '1.5%',
     display: 'block',
     marginBottom: '7%'
   },

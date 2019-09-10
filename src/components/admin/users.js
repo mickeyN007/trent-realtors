@@ -5,31 +5,34 @@ import { Container, Row, Col } from 'react-bootstrap'
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import cellEditFactory from 'react-bootstrap-table2-editor';
-import { Divider } from '@material-ui/core'
 const { SearchBar } = Search;
 
-const users = [
+/*const users = [
    {name: 'Tiffany Oduah', type: 'Seller', status: 'Active'},
  {name: 'Michael Oduah', type: 'Agent', status: 'Inactive'},
    {name: 'Tiffany Oduah', type: 'Seller', status: 'Active'},
  {name: 'Ekene Oduah', type: 'Buyer', status: 'Active'},
-]
+]*/
 const columns = [{
   dataField: 'id',
+  formatter: (cell, row, rowIndex) => `${rowIndex+1}`,
   text: 'S/N'
 }, {
-  dataField: 'name',
+  dataField: 'firstname',
+  formatter: (cell, row) => `${row.firstname} ${row.lastname}`,
   text: 'Name'
 }, {
   dataField: 'type',
   text: 'Type'
 }, {
   dataField: 'status',
+  formatter: (cell, row) => `${(row.status) ? row.status : 'Inactive'}`,
   text: 'Status'
 }];
 
 export default class Users extends Component {
   render() {
+    const { users } = this.props
     return (
       <Container style={styles.container}>
         <Row style={styles.title}>
@@ -123,7 +126,7 @@ const styles = {
     padding: '3%',
   },
   container: {
-    marginTop: '5%'
+    marginTop: '5%',
   },
   title: {
     paddingBottom: '2.5%'

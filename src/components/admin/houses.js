@@ -36,7 +36,7 @@ export default class Houses extends Component {
     return (
       <Container style={styles.container}>
         <Row style={styles.title}>
-          <h2>Houses</h2>
+          <h2><b>Houses</b></h2>
         </Row>
 
         <Row style={styles.spacing}>
@@ -46,7 +46,7 @@ export default class Houses extends Component {
         </Row>
 
         <Row style={styles.spacing}>
-          <h4><b>Statistics:</b></h4>
+          <h4>Statistics:</h4>
         </Row>
         <Row style={styles.spacing}>
           <Col lg={3} md={3}>
@@ -124,7 +124,7 @@ export default class Houses extends Component {
           </Col>
         </Row>
         <Row style={styles.spacing}>
-          <h4><b>List of Houses:</b></h4>
+          <h4>List of Houses:</h4>
         </Row>
         <Row style={styles.marginLeft}>
               <ToolkitProvider
@@ -158,7 +158,7 @@ const styles = {
     padding: '3%',
   },
   container: {
-    marginTop: '5%'
+    marginTop: '5%',
   },
   title: {
     paddingBottom: '2.5%'

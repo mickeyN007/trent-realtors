@@ -36,7 +36,7 @@ export default class Users extends Component {
     return (
       <Container style={styles.container}>
         <Row style={styles.title}>
-          <h2>Users</h2>
+          <h2 style={{color: '#b22222'}}><b>Users</b></h2>
         </Row>
 
         <Row style={styles.spacing}>

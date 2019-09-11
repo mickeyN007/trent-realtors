@@ -49,52 +49,6 @@ export default class Appointments extends Component {
         </Row>
 
         <Row style={styles.spacing}>
-          <h4><b>Statistics:</b></h4>
-        </Row>
-        <Row style={styles.spacing}>
-          <Col lg={3} md={3}>
-            Total:
-          </Col>
-          <Col lg={9} md={9}>
-            <span style={styles.circle}></span>
-          </Col>
-        </Row>
-        <Row style={styles.spacing}>
-          <Col lg={3} md={3}>
-            Status:
-          </Col>
-          <Col lg={4} md={4}>
-            <span style={styles.cirlce}></span>
-            <div>Active</div>
-          </Col>
-          <Col lg={4} md={4}>
-            <div style={styles.cirlce}></div>
-            <div>Inactive</div>
-          </Col>
-        </Row>
-        <Row style={styles.spacingB}>
-          <Col lg={3} md={3}>
-            Type:
-          </Col>
-          <Col lg={3} md={3}>
-            <div style={styles.cirlce}></div>
-            <div>Agent</div>
-          </Col>
-          <Col lg={3} md={3}>
-            <div style={styles.cirlce}>Buyer</div>
-            <div></div>
-          </Col>
-          <Col lg={3} md={3}>
-            <div style={styles.cirlce}></div>
-            <div>Seller</div>
-          </Col>
-        </Row>
-        <Row style={styles.spacing}>
-          <Col lg={12} md={12}>
-            <hr />
-          </Col>
-        </Row>
-        <Row style={styles.spacing}>
           <h4><b>List of appointments:</b></h4>
         </Row>
         <Row style={styles.marginLeft}>

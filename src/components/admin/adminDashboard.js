@@ -47,6 +47,16 @@ export default class AdminDashboard extends Component {
     this.getData()
   }
   render() {
+    //.toSplit(' ')[4].split(':')[0]
+    var date = new Date().toString().split(' ')
+    date = `${date[0]} ${date[1]} ${date[2]} ${date[3]}`
+    var time = new Date().getHours()+1
+    if (time<12)
+      time = "Morning"
+    else if (time>=12)
+      time="Afternoon"
+    else
+      time="Evening"
     return (
       <Container fluid>
         <BreakpointProvider>
@@ -55,11 +65,11 @@ export default class AdminDashboard extends Component {
           <Col xs={12} md={12}><CustomDrawer changeMenu={this.changeMenu.bind(this)} {...this.props} /></Col>
         </Row>
         <Row style={styles.header}>
-          <Col xs={7} md={7}><h5 style={{color: 'black'}}>Welcome, {this.props.name}</h5></Col>
+          <Col xs={7} md={7}><h3 style={{color: 'white'}}>Good {time}, {this.props.name}</h3></Col>
           <Col xs={5} md={5}>
                 <Col xs={12} lg={12}>
-                <p style={{fontSize: 11, color: 'black'}}>
-                  {new Date().toString().split('GMT')[0]}
+                <p style={{fontSize: 11, color: 'white'}}>
+                  {date}
                 </p>
                 </Col>
                 <Col xs={12} lg={12} onClick={this.logOut.bind(this)}>
@@ -77,20 +87,20 @@ export default class AdminDashboard extends Component {
           <Col lg={1}><CustomDrawer changeMenu={this.changeMenu.bind(this)} {...this.props} /></Col>
           <Col lg={11}>
             <Row style={styles.headerB}>
-               <Col xs={7} lg={7}><h5 style={{color: 'black'}}>Welcome, {this.props.name}</h5></Col>
-              <Col xs={5} lg={5}>
-                <Col xs={12} lg={12}>
-                <p style={{fontSize: 11, color: 'black'}}>
-                  {new Date().toString().split('GMT')[0]}
+               <div style={{display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center'}}><h3 style={{color: 'white'}}>Good {time}, {this.props.name}</h3></div>
+              <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'flex-end'}}>
+                <div>
+                <p style={{fontSize: 16, color: 'white'}}>
+                  {date}
                 </p>
-                </Col>
-                <Col xs={12} lg={12} onClick={this.logOut.bind(this)}>
-                  <img src={require('./../../images/logout.jpeg')} width='10%'/>
-                </Col>
-              </Col>
+                </div>
+                <div onClick={this.logOut.bind(this)}>
+                  <img src={require('./../../images/logout.jpeg')} width='30%'/>
+                </div>
+              </div>
             </Row>
-            <Row>
-              <Container style={{marginLeft: '10.5%', marginRight: '2.5%'}}>
+            <Row style={{ backgroundColor: '#f4f4f4', paddingBottom: '5%'}}>
+              <Container style={{marginLeft: '10.5%', marginRight: '2.5%',}}>
                 {this.display()}
               </Container>
             </Row>
@@ -127,7 +137,7 @@ export default class AdminDashboard extends Component {
       }
     ]
     var display=[]
-    var media = (window.innerWidth>360)?{height: 300} : {height:150}
+    var media = (window.innerWidth>360)?{height: 200} : {height:50}
     if (window.innerWidth<=1025)
       for (var i=0; i<menu.length; i+=2) {
         display.push(
@@ -138,7 +148,6 @@ export default class AdminDashboard extends Component {
         <CardMedia
           style={media}
           image={menu[i].image}
-          title="Contemplative Reptile"
         />
 
         <CardContent>
@@ -164,7 +173,6 @@ export default class AdminDashboard extends Component {
         <CardMedia
           style={media}
           image={menu[i+1].image}
-          title="Contemplative Reptile"
         />
         <CardContent>
           <Typography gutterBottom variant="h6" component="h6">
@@ -197,7 +205,6 @@ export default class AdminDashboard extends Component {
         <CardMedia
           style={media}
           image={menu[i].image}
-          title="Contemplative Reptile"
         />
 
         <CardContent>
@@ -225,7 +232,6 @@ export default class AdminDashboard extends Component {
         <CardMedia
           style={media}
           image={menu[i+1].image}
-          title="Contemplative Reptile"
         />
 
         <CardContent>
@@ -254,7 +260,6 @@ export default class AdminDashboard extends Component {
         <CardMedia
           style={media}
           image={menu[i+2].image}
-          title="Contemplative Reptile"
         />
 
         <CardContent>
@@ -394,25 +399,27 @@ export default class AdminDashboard extends Component {
 const styles = {
   header: {
     //marginTop: '5%',
-    padding: '5%',
+    padding: '1.5%',
     //paddingTop: '5%',
-    backgroundColor: '#f6f6f6',
+    backgroundColor: '#b22222',
+    background: 'linear-gradient(to right bottom, #b22222, #FFF, #b22222)',
   },headerB: {
     //marginTop: '5%',
-    padding: '5%',
+    padding: '1%',
     //paddingTop: '5%',
-    backgroundColor: '#f6f6f6',
+    backgroundColor: '#b22222',
     marginLeft: '5%'
   },
 
   card: {
     maxWidth: 345,
     marginTop: '20%',
+    marginRight: '10%'
     //marginLeft: '5%'
   },
   media: {
-    height: 150,
-    marginTop: '10%'
+    height: 100,
+    paddingTop: '85%'
   },
   color: {
     backgroundColor: 'white'

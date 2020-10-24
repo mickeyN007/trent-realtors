@@ -26,7 +26,7 @@ export default class Header extends Component {
   }
   render() {
     let colorStyle =  {color: 'white', listStyleType: 'none'}
-    let colorStyleB =  {color: 'black', listStyleType: 'none'}
+    let colorStyleB =  {color: 'black', listStyleType: 'none', fontSize: '16px', fontWeight: 400, }
 
     let loginPadding = (Object.keys(this.props.headerStyle).length != 0) ? {marginTop: 110} : {marginTop: '1%'}
 
@@ -65,6 +65,9 @@ export default class Header extends Component {
         </div>}
       </Breakpoint>
         <Breakpoint large up>
+          <div style={styles.navlinksB}>
+            <div style={styles.logoContainer}><img src={logo} style={styles.logo}/></div>
+          </div>
         <nav>
           <Row style={{...{width: '40%', padding: '1%', zIndex: 9999999999999999}, ...this.props.headerStyle}}>
             <Col lg={3}>
@@ -126,9 +129,25 @@ export default class Header extends Component {
 const styles = {
   container: {
     backgroundColor: 'white',
-    clear: 'both',
     zIndex: 9999999999999,
+    width: '100%',
+    borderColor: "#B22222",
+    borderBottomStyle: "solid",
+    height: "100px",
+      //paddingTop: '2%',
+      //paddingBottom: '0',
+      //paddingLeft: '10%',
 
+  },
+  navlinksB: {
+      color: "black",
+      fontWeight: "bold",
+      margin: 'auto',
+      width: '80%',
+      display: 'flex'
+  },
+  logoContainer: {
+    flex: 1
   },
   topLeftHeader: {
     paddingBottom: '4%',
@@ -150,7 +169,7 @@ const styles = {
   },
   nav_mob: {
     width: '100%',
-    padding: '3%',
+    padding: '1.5%',
     borderBottomStyle: 'solid',
     cursor: 'pointer',
     borderBottomWidth: 1, borderBottomColor: 'white'

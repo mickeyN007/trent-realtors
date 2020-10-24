@@ -97,15 +97,15 @@ export default class Login extends Component {
 const styles = {
   container: {
     backgroundColor: 'white',
-    marginTop: '1%',
+    marginTop: '.5%',
     paddingLeft: '2%',
     paddingTop: '2%',
     paddingRight: '2%',
     position: 'fixed',
-    marginLeft: '73%',
+    marginLeft: '75%',
     width: '21%',
     fontSize: '15px',
-    boxShadow: '1px 2px 5px 5px #888888',
+    //boxShadow: '1px 2px 5px 5px #888888',
     zIndex: 9999999999
   },
   input: {

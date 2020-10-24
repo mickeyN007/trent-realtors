@@ -65,7 +65,7 @@ export default class AdminDashboard extends Component {
           <Col xs={12} md={12}><CustomDrawer changeMenu={this.changeMenu.bind(this)} {...this.props} /></Col>
         </Row>
         <Row style={styles.header}>
-          <Col xs={7} md={7}><h3 style={{color: 'white'}}>Good {time}, {this.props.name}</h3></Col>
+          <Col xs={7} md={7}><h3 style={{color: 'white'}}>Good {time} {this.props.name}</h3></Col>
           <Col xs={5} md={5}>
                 <Col xs={12} lg={12}>
                 <p style={{fontSize: 11, color: 'white'}}>
